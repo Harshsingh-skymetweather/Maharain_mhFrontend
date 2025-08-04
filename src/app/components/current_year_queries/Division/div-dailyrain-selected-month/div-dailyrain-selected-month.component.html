@@ -1,0 +1,109 @@
+<!-- start content -->
+<section class="user-right-side-content pb-5">
+  <div class="container-fluid">
+      <div class="row">
+          <div class="col-lg-3 col-xl-2">
+             <app-side-navigation></app-side-navigation>
+          </div>
+          <div class="col-lg-9 col-xl-10 ps-md-4">
+
+            <!-- start search -->
+            <div class="search-bg px-4 pb-4 pt-2 px-lg-5 pb-lg-3 pt-lg-2 mb-3">
+              <div class="row align-items-end">
+
+                <div class="col-sm-6 col-md-2 mt-3" >
+                  <select  name="selectedDistrict" class="form-select" [(ngModel)]="selectedMonth">
+                      <option  value="">-- For month --</option>
+                      <option *ngFor="let month of arraymonth"[value] ='month.value' >{{month.name}}</option>
+                  </select>
+              </div>
+
+               <div class="col-sm-6 col-md-1 mt-3">
+                <div class="d-grid">
+                    <button class="btn btn-primary py-2" (click)="onSubmit()">Go</button>
+                </div>
+             </div>
+              </div>
+            </div>
+            <!-- end search -->
+
+            <div *ngIf ="report.length">
+
+                <!-- Heading -->
+                <div class="report-generated-bg px-4 py-3 mb-4 bg-body-secondary">
+                  <div class="row">
+                    <div class="col-sm-6">
+                      <h5 class="mb-0">Rainfall Recording & Analysis</h5>
+                      <span>Division wise rainfall for <b>Maharashtra</b> State (as on {{today | date:'dd-MM-yyyy'}})</span>
+                    </div>
+                    <div class="col-sm-6 text-end">
+                      <span>Generated at:{{today | date:'dd-MMMM-yyyy h:mm a'}} </span>
+                      <br>
+                      <span>(Rainfall in mm)</span>
+                    </div>
+                  </div>
+                </div>
+              <!-- Heading -->
+
+              <!-- start result -->
+              <div class="user-data-result-bg">
+                  <div class="user-data-result-header mb-3">
+                      <div class="row align-items-center">
+                          <div class="col">
+                            <button id="download-pdf" type="button" class="btn btn-dark me-2" (click)="downloadPdf()">Pdf</button>
+                            <button type="button" class="btn btn-dark ms-2" (click)="downloadExcel()">Excel</button>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="table-responsive">
+                      <table class="table table-bordered">
+                      <thead class="table-light">
+                        <tr>
+                            <th>Sr</th>
+                            <th>Divisions</th>
+                            <th>Division Normal Rainfall</th>
+                            <ng-container *ngFor="let dd of dates">
+                              <th>{{dd}}</th>
+                            </ng-container>
+                            <th>Total Rainfall</th>
+                            <th>% Rainfall</th>
+                            <th>Rainy Days</th>
+                        </tr>
+
+                    </thead>
+                  <tbody>
+                    <tr *ngFor="let division of report let idx = index">
+                      <td>{{ idx + 1 }}</td>
+                      <td>{{ division.DivisionName }}</td>
+                      <td>{{ division.Normal }}</td>
+                      <ng-container *ngFor="let dd of dates">
+                        <td>{{ getRainValue(division, dd) | number: '1.1-1' }} </td>
+                      </ng-container>
+                      <td>{{ getDivisionTotalRain(division) | number: '1.1-1' }}</td>
+                      <td>{{ getPercentage(division) | number: '1.1-1' }}</td>
+                      <td>{{ getRainyDays(division) | number: '1.1-1' }}</td>
+                    </tr>
+                    <tr *ngFor="let state of statereport ">
+                      <th></th>
+                      <th>{{ state.state.includes('11') ? ' State - Maharashtra' : state.state }}</th>
+                      <th>{{ state.Normal }}</th>
+                      <ng-container *ngFor="let dd of dates">
+                        <th>{{ getRainValue(state, dd) | number: '1.1-1' }} </th>
+                      </ng-container>
+                      <th>{{ getDivisionTotalRain(state) | number: '1.1-1' }}</th>
+                      <th>{{ getPercentage(state) | number: '1.1-1' }}</th>
+                      <th>{{ getRainyDays(state) | number: '1.1-1' }}</th>
+                    </tr>
+                  </tbody>
+                    </table>
+                  </div>
+              </div>
+              <!-- end result -->
+            </div>
+          </div>
+      </div>
+  </div>
+</section>
+<!-- end content -->
+
+

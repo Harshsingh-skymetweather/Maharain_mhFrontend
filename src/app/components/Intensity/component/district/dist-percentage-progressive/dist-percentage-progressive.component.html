@@ -1,0 +1,77 @@
+<!-- start content -->
+<section class="user-right-side-content pb-5">
+  <div class="container-fluid">
+      <div class="row">
+          <div class="col-lg-3 col-xl-2">
+             <app-side-navigation></app-side-navigation>
+          </div>
+          <div class="col-lg-9 col-xl-10 ps-md-4">
+        <div *ngIf="intensityData.length">
+        <!-- start report generated -->
+
+        <div  class="report-generated-bg px-4 py-3 mb-4 bg-body-secondary">
+              <div class="row">
+                  <h5 class="mb-0">Rainfall Recording & Analysis</h5>
+                  <span>State :: <b>Maharashtra</b> District Wise Percentage of Rain ::(as on {{today | date:'dd,MMMM-yyyy'}})</span>
+              </div>
+          </div>
+
+        <!-- start report generated -->
+
+                <!-- start result -->
+                <div   class="user-data-result-bg">
+                    <div class="user-data-result-header mb-3">
+                        <div class="row align-items-center">
+                            <div class="col">
+                              <button id="download-pdf" type="button" class="btn btn-dark me-2" (click)="downloadPdf()">Pdf</button>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="table-responsive">
+                      <table id="intensityTable" class="table table-bordered">
+                        <thead class="table-light">
+                          <tr>
+                            <ng-container *ngFor="let division of intensityData">
+                              <th>Name</th>
+                              <th>%</th>
+                            </ng-container>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr *ngFor="let row of getMaxRows()">
+                            <ng-container *ngFor="let division of intensityData">
+                              <ng-container *ngIf="division.districts[row]">
+                                <td>{{ division.districts[row].district_name }}</td>
+                                <td [style.background-color]="getIntensityColor(division.districts[row].intensity)">
+                                  {{ division.districts[row].intensity | number:'1.1-1' }}
+                                </td>
+                              </ng-container>
+                              <ng-container *ngIf="!division.districts[row] && row === division.districts.length">
+                                <td><strong>{{ division.division_name }}</strong></td>
+                                <td [style.background-color]="getIntensityColor(division.intensity)">
+                                  <strong>{{ division.intensity | number:'1.1-1' }}</strong>
+                                </td>
+                              </ng-container>
+                              <ng-container *ngIf="!division.districts[row] && row > division.districts.length">
+                                <td></td>
+                                <td></td>
+                              </ng-container>
+                            </ng-container>
+                          </tr>
+                        </tbody>
+                      </table>
+
+
+                    </div>
+                </div>
+
+              </div>
+
+          </div>
+      </div>
+  </div>
+</section>
+
+
+

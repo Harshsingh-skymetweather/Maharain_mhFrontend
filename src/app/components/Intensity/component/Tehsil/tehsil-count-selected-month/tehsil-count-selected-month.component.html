@@ -1,0 +1,101 @@
+<!-- start content -->
+<section class="user-right-side-content pb-5">
+  <div class="container-fluid">
+      <div class="row">
+          <div class="col-lg-3 col-xl-2">
+             <app-side-navigation></app-side-navigation>
+          </div>
+          <div class="col-lg-9 col-xl-10 ps-md-4">
+
+            <div class="search-bg px-4 pb-4 pt-2 px-lg-5 pb-lg-3 pt-lg-2 mb-3">
+              <div class="row align-items-end">
+
+                <div class="col-sm-6 col-md-2 mt-3" >
+                  <select  name="selectedDistrict" class="form-select" [(ngModel)]="selectedMonth">
+                      <option  value="">-- For month --</option>
+                      <option *ngFor="let month of arraymonth" [value]="month.value">{{ month.abbr }}</option>
+                  </select>
+              </div>
+
+                <div class="col-sm-6 col-md-1 mt-3">
+                      <div class="d-grid">
+                          <button class="btn btn-primary py-2" (click)="onSubmit()" >Go</button>
+                      </div>
+                  </div>
+              </div>
+            </div>
+          <div *ngIf="report && report.length">
+          <div class="report-generated-bg px-4 py-3 mb-4 bg-body-secondary">
+            <div class="row">
+                <h5 class="mb-0">Rainfall Recording & Analysis</h5>
+                <span>State :: <b>Maharashtra</b> Percent Categorization wise number of Tehsil :: (for {{ getFormattedMonth() }}-2024 )</span>
+            </div>
+          </div>
+
+              <div class="user-data-result-bg">
+                  <div class="user-data-result-header mb-3">
+                      <div class="row align-items-center">
+                          <div class="col">
+                            <button id="download-pdf" type="button" class="btn btn-dark me-2" (click)="downloadPdf()">Pdf</button>
+                            <button type="button" class="btn btn-dark ms-2" (click)="downloadExcel()">Excel</button>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="table-responsive">
+                    <table class="table table-bordered">
+                      <thead class="table-light">
+                        <tr>
+                          <th>Sr.</th>
+                          <th>District</th>
+                          <th>below 25%</th>
+                          <th>25%-50%</th>
+                          <th>50%-75%</th>
+                          <th>75%-100%</th>
+                          <th>100% Above</th>
+                          <th>Total</th>
+                        </tr>
+                       </thead>
+                       <tbody>
+                        <ng-container *ngFor="let divisionData of report">
+                          <tr *ngFor="let district of divisionData.districts; let i = index">
+                            <td>{{ i + 1 }}</td>
+                            <td>{{ district.district }}</td>
+                            <td>{{ district['below25'] !== 0 ? district['below25'] : '-' }}</td>
+                            <td>{{ district['25-50'] !== 0 ? district['25-50'] : '-' }}</td>
+                            <td>{{ district['50-75'] !== 0 ? district['50-75'] : '-' }}</td>
+                            <td>{{ district['75-100'] !== 0 ? district['75-100'] : '-' }}</td>
+                            <td>{{ district['100above'] !== 0 ? district['100above'] : '-' }}</td>
+                            <td>{{ district['below25'] + district['25-50'] + district['50-75'] + district['75-100'] + district['100above'] !== 0 ? district['below25'] + district['25-50'] + district['50-75'] + district['75-100'] + district['100above'] : '-' }}</td>
+                          </tr>
+                          <tr>
+                            <th></th>
+                            <th>Division - {{ divisionData.division }}</th>
+                            <th>{{ calculateColumnSum(divisionData.districts, 'below25') !== 0 ? calculateColumnSum(divisionData.districts, 'below25') : '-' }}</th>
+                            <th>{{ calculateColumnSum(divisionData.districts, '25-50') !== 0 ? calculateColumnSum(divisionData.districts, '25-50') : '-' }}</th>
+                            <th>{{ calculateColumnSum(divisionData.districts, '50-75') !== 0 ? calculateColumnSum(divisionData.districts, '50-75') : '-' }}</th>
+                            <th>{{ calculateColumnSum(divisionData.districts, '75-100') !== 0 ? calculateColumnSum(divisionData.districts, '75-100') : '-' }}</th>
+                            <th>{{ calculateColumnSum(divisionData.districts, '100above') !== 0 ? calculateColumnSum(divisionData.districts, '100above') : '-' }}</th>
+                            <th>{{ calculateTotalForDivision(divisionData.districts) !== 0 ? calculateTotalForDivision(divisionData.districts) : '-' }}</th>
+                          </tr>
+                        </ng-container>
+                        <tr>
+                          <th></th>
+                          <th>Total -</th>
+                          <th>{{ calculateOverallSum('below25') !== 0 ? calculateOverallSum('below25') : '-' }}</th>
+                          <th>{{ calculateOverallSum('25-50') !== 0 ? calculateOverallSum('25-50') : '-' }}</th>
+                          <th>{{ calculateOverallSum('50-75') !== 0 ? calculateOverallSum('50-75') : '-' }}</th>
+                          <th>{{ calculateOverallSum('75-100') !== 0 ? calculateOverallSum('75-100') : '-' }}</th>
+                          <th>{{ calculateOverallSum('100above') !== 0 ? calculateOverallSum('100above') : '-' }}</th>
+                        <th>{{ calculateOverallTotal() !== 0 ? calculateOverallTotal() : '-' }}</th>
+                        </tr>
+                      </tbody>
+
+
+                    </table>
+                  </div>
+              </div>
+            </div>
+          </div>
+      </div>
+  </div>
+</section>

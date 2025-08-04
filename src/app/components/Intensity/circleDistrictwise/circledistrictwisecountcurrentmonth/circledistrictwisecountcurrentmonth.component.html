@@ -1,0 +1,81 @@
+<section class="user-right-side-content pb-5">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-lg-3 col-xl-2">
+        <app-side-navigation></app-side-navigation>
+      </div>
+      <div class="col-lg-9 col-xl-10 ps-md-4">
+        <div *ngIf="report && report.length">
+        <div class="report-generated-bg px-4 py-3 mb-4 bg-body-secondary">
+          <div class="row">
+            <h5 class="mb-0">Rainfall Recording & Analysis</h5>
+            <span>State :: <b>Maharashtra</b>  Percent Categorization of Circles as compared to normal rainfall  ::(as on {{currentDate | date:'dd,MMMM-yyyy'}})</span>
+          </div>
+        </div >
+
+        <div class="user-data-result-bg">
+          <div class="user-data-result-header mb-3">
+            <div class="row align-items-center">
+              <div class="col">
+                <button id="download-pdf" type="button" class="btn btn-dark me-2" (click)="downloadPdf()">Pdf</button>
+                <button type="button" class="btn btn-dark ms-2" (click)="downloadExcel()">Excel</button>
+              </div>
+            </div>
+          </div>
+          <div class="table-responsive">
+            <table class="table table-bordered">
+              <thead class="table-light">
+                <tr>
+                  <th>Sr.</th>
+                  <th>Tehsils</th>
+                  <th>below 25%</th>
+                  <th>25%-50%</th>
+                  <th>50%-75%</th>
+                  <th>75%-100%</th>
+                  <th>100% Above</th>
+                  <th>Total</th>
+                </tr>
+              </thead>
+              <tbody>
+                <ng-container *ngFor="let districtData of report">
+                  <tr *ngFor="let tehsil of districtData.tehsils; let i = index">
+                    <td>{{ i + 1 }}</td>
+                    <td>{{ tehsil.tehsil }}</td>
+                    <td>{{ tehsil['below25'] !== 0 ? tehsil['below25'] : '-' }}</td>
+                    <td>{{ tehsil['25-50'] !== 0 ? tehsil['25-50'] : '-' }}</td>
+                    <td>{{ tehsil['50-75'] !== 0 ? tehsil['50-75'] : '-' }}</td>
+                    <td>{{ tehsil['75-100'] !== 0 ? tehsil['75-100'] : '-' }}</td>
+                    <td>{{ tehsil['100above'] !== 0 ? tehsil['100above'] : '-' }}</td>
+                    <td>{{ tehsil['below25'] + tehsil['25-50'] + tehsil['50-75'] + tehsil['75-100'] + tehsil['100above'] !== 0 ? tehsil['below25'] + tehsil['25-50'] + tehsil['50-75'] + tehsil['75-100'] + tehsil['100above'] : '-' }}</td>
+                  </tr>
+                  <tr>
+                    <th></th>
+                    <th>{{ districtData.district }}</th>
+                    <th>{{ calculateColumnSum(districtData.tehsils, 'below25') !== 0 ? calculateColumnSum(districtData.tehsils, 'below25') : '-' }}</th>
+                    <th>{{ calculateColumnSum(districtData.tehsils, '25-50') !== 0 ? calculateColumnSum(districtData.tehsils, '25-50') : '-' }}</th>
+                    <th>{{ calculateColumnSum(districtData.tehsils, '50-75') !== 0 ? calculateColumnSum(districtData.tehsils, '50-75') : '-' }}</th>
+                    <th>{{ calculateColumnSum(districtData.tehsils, '75-100') !== 0 ? calculateColumnSum(districtData.tehsils, '75-100') : '-' }}</th>
+                    <th>{{ calculateColumnSum(districtData.tehsils, '100above') !== 0 ? calculateColumnSum(districtData.tehsils, '100above') : '-' }}</th>
+                    <th>{{ calculateTotalForDistrict(districtData.tehsils) !== 0 ? calculateTotalForDistrict(districtData.tehsils) : '-' }}</th>
+                  </tr>
+                </ng-container>
+                <tr>
+                  <th></th>
+                  <th>Total -</th>
+                  <th>{{ calculateOverallSum('below25') !== 0 ? calculateOverallSum('below25') : '-' }}</th>
+                  <th>{{ calculateOverallSum('25-50') !== 0 ? calculateOverallSum('25-50') : '-' }}</th>
+                  <th>{{ calculateOverallSum('50-75') !== 0 ? calculateOverallSum('50-75') : '-' }}</th>
+                  <th>{{ calculateOverallSum('75-100') !== 0 ? calculateOverallSum('75-100') : '-' }}</th>
+                  <th>{{ calculateOverallSum('100above') !== 0 ? calculateOverallSum('100above') : '-' }}</th>
+                  <th>{{ calculateOverallTotal() !== 0 ? calculateOverallTotal() : '-' }}</th>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </div>
+      </div>
+    </div>
+  </div>
+</section>

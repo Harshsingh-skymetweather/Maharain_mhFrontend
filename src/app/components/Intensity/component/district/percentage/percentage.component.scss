@@ -1,0 +1,24 @@
+table {
+  width: 100%;
+  table-layout: auto; /* Allows columns to adjust based on content */
+  border-collapse: collapse; /* Removes spacing between cells */
+}
+
+th, td {
+  padding: 8px; /* Adjust padding as needed */
+  text-align: left; /* Align text to the left */
+  border: 1px solid #ddd; /* Adds borders to cells */
+  white-space: nowrap; /* Prevents text from wrapping */
+}
+
+thead {
+  background-color: #f8f9fa; /* Background color for header */
+}
+
+td {
+  white-space: nowrap; /* Prevents text wrapping */
+}
+
+tbody td {
+  background-color: #fff; /* Default background color for tbody cells */
+}

@@ -1,0 +1,85 @@
+<!-- start content -->
+<section class="user-right-side-content pb-5">
+  <div class="container-fluid">
+      <div class="row">
+          <div class="col-lg-3 col-xl-2">
+             <app-side-navigation></app-side-navigation>
+          </div>
+
+          <div class="col-lg-9 col-xl-10 ps-md-4">
+
+             <!-- start search -->
+             <div class="search-bg px-4 pb-4 pt-2 px-lg-5 pb-lg-3 pt-lg-2 mb-3">
+              <div class="row align-items-end">
+                <div class="col-sm-6 col-md-2 mt-3">
+                  <select name="selectedYear" class="form-select" [(ngModel)]="selectedYear" (change)="onYearChange($event)">
+                    <option value="">-- Select Year --</option>
+                    <option *ngFor="let year of years" [value]="year">{{year}}</option>
+                  </select>
+                </div>
+
+                <div class="col-sm-6 col-md-1 mt-3">
+                  <div class="d-grid">
+                    <button class="btn btn-primary py-2" (click)="onSubmit()" [disabled]="!selectedYear">Go</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div *ngIf="report.length">
+            <!-- end search -->
+              <!-- Heading -->
+          <div class="report-generated-bg px-4 py-3 mb-4 bg-body-secondary">
+            <div class="row">
+              <div class="col-sm-6">
+                <h5 class="mb-0">Rainfall Recording & Analysis</h5>
+                <span>Division wise rainfall for <b>Maharashtra</b> State (as on {{today | date:'dd-MM-yyyy'}})</span>
+              </div>
+              <div class="col-sm-6 text-end">
+                <span>Generated at:{{today | date:'dd-MMMM-yyyy h:mm a'}} </span>
+                <br>
+                <span>(Rainfall in mm)</span>
+              </div>
+            </div>
+          </div>
+          <!-- Heading -->
+
+              <!-- start result -->
+              <div class="user-data-result-bg">
+                  <div class="user-data-result-header mb-3">
+                      <div class="row align-items-center">
+                          <div class="col">
+                            <button id="download-pdf" type="button" class="btn btn-dark me-2" (click)="downloadPdf()">Pdf</button>
+                            <button type="button" class="btn btn-dark ms-2" (click)="downloadExcel()">Excel</button>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="table-responsive">
+                    <table class="table table-bordered">
+                      <thead class="table-light">
+                        <tr>
+                          <th>Sr</th>
+                          <th>Division</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr *ngFor="let item of report; let i = index">
+                          <td>{{ i + 1 }}</td>
+                          <td>{{item.DivisionName}}</td>
+                          <ng-container *ngFor="let object of item.DateData">
+                            <td>{{object.date}} ({{object.rain}})</td>
+                          </ng-container>
+                        </tr>
+                      </tbody>
+                    </table>
+
+                  </div>
+              </div>
+              <!-- end result -->
+            </div>
+          </div>
+      </div>
+  </div>
+</section>
+<!-- end content -->
+
+

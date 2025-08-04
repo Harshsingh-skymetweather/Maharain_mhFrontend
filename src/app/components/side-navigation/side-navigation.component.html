@@ -1,0 +1,769 @@
+<section class="mainSection">
+    <div class="sub-side-navigation-bg p-3 bg-body-secondary">
+        <!-- start navigation -->
+         <div class="sub-side-navigation bg-body-secondary">
+            <!-- start accordion -->
+            <div class="accordion accordion-flush bg-body-secondary" id="accordionFlushNav">
+
+                <!-- start accordion item 1-->
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="nav-headingOne">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#nav-collapseOne" aria-expanded="false"
+                            aria-controls="nav-collapseOne">
+                            <i class="bi bi-speedometer2 pe-2"></i>Current Year Rain
+                        </button>
+                    </h2>
+                    <div id="nav-collapseOne" class="accordion-collapse collapse"
+                        aria-labelledby="nav-headingOne" data-bs-parent="#accordionFlushNav">
+                        <div class="accordion-body">
+                            <!-- start sub accordion -->
+                            <div class="accordion accordion-flush" id="accordionFlushSubNav">
+                                <!-- start sub accordion item 1 -->
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="subNav-headingOne">
+                                        <button class="accordion-button collapsed" type="button"
+                                            data-bs-toggle="collapse" data-bs-target="#subNav-collapseOne"
+                                            aria-expanded="false" aria-controls="subNav-collapseOne">
+                                            Report - Circle Wise
+                                        </button>
+                                    </h2>
+                                    <div id="subNav-collapseOne" class="accordion-collapse collapse"
+                                        aria-labelledby="subNav-headingOne"
+                                        data-bs-parent="#accordionFlushSubNav">
+                                        <div class="accordion-body">
+                                            <!-- start nav item link -->
+                                            <a [queryParams]="{ company_id: companyId || '' }" [routerLink]="['/june']"  class="nav-item-link">June Reports</a>
+                                            <a  [queryParams]="{ company_id: companyId || '' }" [routerLink]="['/june-september']"class="nav-item-link">June September</a>
+                                            <a  [queryParams]="{ company_id: companyId || '' }" [routerLink]="['/june-december']"class="nav-item-link">June December</a>
+                                            <a  [queryParams]="{ company_id: companyId || '' }" [routerLink]="['/season']"class="nav-item-link">Season</a>
+                                            <a  [queryParams]="{ company_id: companyId || '' }" [routerLink]="['/month-wise']"class="nav-item-link">Report Month Wise With Total</a>
+                                            <a [queryParams]="{ company_id: companyId || '' }" [routerLink]="['/rain-compare']"  class="nav-item-link">Comparision With Last Year</a>
+                                            <!-- <a routerLink="/june-september" class="nav-item-link">June September</a>
+                                            <a routerLink="/june-december" class="nav-item-link">June December</a>
+                                            <a routerLink="/season" class="nav-item-link">Season</a>
+                                            <a routerLink="/month-wise" class="nav-item-link">Report Month Wise With Total</a>
+                                            <a routerLink="/rain-compare" class="nav-item-link">Comparision With Last Year</a> -->
+                                            <!-- end nav item link -->
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- end sub accordion item 1 -->
+
+                                <!-- start sub accordion item 2 -->
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="subNav-headingTwo">
+                                        <button class="accordion-button collapsed" type="button"
+                                            data-bs-toggle="collapse" data-bs-target="#subNav-collapseTwo"
+                                            aria-expanded="false" aria-controls="subNav-collapseTwo">
+                                            Report - Tehsil Wise
+                                        </button>
+                                    </h2>
+                                    <div id="subNav-collapseTwo" class="accordion-collapse collapse"
+                                        aria-labelledby="subNav-headingTwo"
+                                        data-bs-parent="#accordionFlushSubNav">
+                                        <div class="accordion-body">
+                                            <!-- start nav item link -->
+                                            <a  [queryParams]="{ company_id: companyId || '' }" [routerLink]="['/tehsil-junreport']" class="nav-item-link">Report June Month</a>
+                                            <a  [queryParams]="{ company_id: companyId || '' }" [routerLink]="['/tehsil-junsept']" class="nav-item-link">June September</a>
+                                            <a  [queryParams]="{ company_id: companyId || '' }" [routerLink]="['/tehsil-jundec']" class="nav-item-link">June December</a>
+                                            <a  [queryParams]="{ company_id: companyId || '' }" [routerLink]="['/tehsil-season']" class="nav-item-link">Season</a>
+                                            <a  [queryParams]="{ company_id: companyId || '' }" [routerLink]="['/tehsil-monthwise']" class="nav-item-link">Report Month Wise With Total</a>
+                                            <!-- <a routerLink="/tehsil-junreport" class="nav-item-link">June Reports</a>
+                                            <a routerLink="/tehsil-junsept" class="nav-item-link">June September</a>
+                                            <a routerLink="/tehsil-jundec" class="nav-item-link">June December</a>
+                                            <a routerLink="/tehsil-season" class="nav-item-link">Season</a>
+                                            <a routerLink="/tehsil-monthwise" class="nav-item-link">Report Month Wise With Total</a> -->
+                                            <!-- end nav item link -->
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- end sub accordion item 2 -->
+
+                                <!-- start sub accordion item 3 -->
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="subNav-headingThree">
+                                        <button class="accordion-button collapsed" type="button"
+                                            data-bs-toggle="collapse" data-bs-target="#subNav-collapseThree"
+                                            aria-expanded="false" aria-controls="subNav-collapseThree">
+                                            Report - District Wise
+                                        </button>
+                                    </h2>
+                                    <div id="subNav-collapseThree" class="accordion-collapse collapse"
+                                        aria-labelledby="subNav-headingThree"
+                                        data-bs-parent="#accordionFlushSubNav">
+                                        <div class="accordion-body">
+                                            <!-- start nav item link -->
+                                            <a  [queryParams]="{ company_id: companyId || '' }" [routerLink]="['/distjun-report']" class="nav-item-link">Report June Month</a>
+                                            <a [queryParams]="{ company_id: companyId || '' }"  [routerLink]="['/distjun-sept']" class="nav-item-link">June September</a>
+                                            <a  [queryParams]="{ company_id: companyId || '' }" [routerLink]="['/distjun-dec']" class="nav-item-link">June December</a>
+                                            <a [queryParams]="{ company_id: companyId || '' }"  [routerLink]="['/dist-season']" class="nav-item-link">Season</a>
+                                            <a  [queryParams]="{ company_id: companyId || '' }" [routerLink]="['/dist-monthwise']" class="nav-item-link">Report Month Wise With Total</a>
+                                            <!-- end nav item link -->
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- end sub accordion item 3 -->
+
+                                <!-- start sub accordion item 4 -->
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="subNav-headingFour">
+                                        <button class="accordion-button collapsed" type="button"
+                                            data-bs-toggle="collapse" data-bs-target="#subNav-collapseFour"
+                                            aria-expanded="false" aria-controls="subNav-collapseFour">
+                                            Report - Division Wise
+                                        </button>
+                                    </h2>
+                                    <div id="subNav-collapseFour" class="accordion-collapse collapse"
+                                        aria-labelledby="subNav-headingFour"
+                                        data-bs-parent="#accordionFlushSubNav">
+                                        <div class="accordion-body">
+                                            <!-- start nav item link -->
+                                            <a  [queryParams]="{ company_id: companyId || '' }" [routerLink]="['/Divjun-report']" class="nav-item-link">Report June Month</a>
+                                            <a  [queryParams]="{ company_id: companyId || '' }" [routerLink]="['/divjun-sept']" class="nav-item-link">Report -June -September</a>
+                                            <a  [queryParams]="{ company_id: companyId || '' }" [routerLink]="['/divjun-dec']" class="nav-item-link">Report -June -December</a>
+                                            <a  [queryParams]="{ company_id: companyId || '' }" [routerLink]="['/Divseason-Component']" class="nav-item-link">Report - Season</a>
+                                            <a  [queryParams]="{ company_id: companyId || '' }" [routerLink]="['/div-monthwise']" class="nav-item-link">Report - Month Wise With Total</a>
+
+                                            <!-- <a routerLink="/divjun-dec" class="nav-item-link">Report -June -December</a>
+                                            <a routerLink="/Divseason-Component" class="nav-item-link">Report - Season</a>
+                                            <a routerLink="/div-monthwise" class="nav-item-link">Report - Month Wise With Total</a> -->
+                                            <!-- end nav item link -->
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- end sub accordion item 4 -->
+                            </div>
+                            <!-- end sub accordion -->
+                        </div>
+                    </div>
+                </div>
+                <!-- end accordion item 1-->
+
+                <!-- start accordion item 2-->
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="nav-headingTwo">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#nav-collapseTwo" aria-expanded="false"
+                            aria-controls="nav-collapseTwo">
+                            <i class="bi bi-lightning-fill pe-2"></i>Current Year Intensity
+                        </button>
+                    </h2>
+                    <div id="nav-collapseTwo" class="accordion-collapse collapse"
+                        aria-labelledby="nav-headingTwo" data-bs-parent="#accordionFlushNav">
+                        <div class="accordion-body">
+                           <!-- start sub accordion -->
+                           <div class="accordion accordion-flush" id="accordionFlushSubNav">
+                            <!-- start sub accordion item 1 -->
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="subNav-headingOne">
+                                    <button class="accordion-button collapsed" type="button"
+                                        data-bs-toggle="collapse" data-bs-target="#subNav-collapseOne"
+                                        aria-expanded="false" aria-controls="subNav-collapseOne">
+                                      Percentage - Circle
+                                    </button>
+                                </h2>
+                                <div id="subNav-collapseOne" class="accordion-collapse collapse"
+                                    aria-labelledby="subNav-headingOne"
+                                    data-bs-parent="#accordionFlushSubNav">
+                                    <div class="accordion-body">
+                                        <!-- start nav item link -->
+                                        <!-- "/admin/dashboard" -->
+                                        <a [queryParams]="{ company_id: companyId || '' }" [routerLink]="['/Intensity/cirle-percentage-current-month']" class="nav-item-link">Percentage Current Month</a>
+                                        <a [queryParams]="{ company_id: companyId || '' }" [routerLink]="['/Intensity/circle-percentage-progressive']" class="nav-item-link">Percentage Progressive</a>
+                                        <a [queryParams]="{ company_id: companyId || '' }" [routerLink]="['/Intensity/circle-Percentage-selected-month']" class="nav-item-link">Percentage Selected Month</a>
+                                        <a [queryParams]="{ company_id: companyId || '' }" [routerLink]="['/Intensity/circle-count-current-month']" class="nav-item-link">Count Current Month</a>
+                                        <a [queryParams]="{ company_id: companyId || '' }" [routerLink]="['/Intensity/circle-count-progressive']" class="nav-item-link">Count Progressive</a>
+                                        <a [queryParams]="{ company_id: companyId || '' }" [routerLink]="['/Intensity/circle-count-selected-month']" class="nav-item-link">Count Selected Month</a>
+                                        <a [queryParams]="{ company_id: companyId || '' }" [routerLink]="['/Intensity/circle-count-season']" class="nav-item-link">Count Season</a>
+                                        <a [queryParams]="{ company_id: companyId || '' }" [routerLink]="['/Intensity/circle-list-current-month']" class="nav-item-link">List Current Month</a>
+                                        <a [queryParams]="{ company_id: companyId || '' }" [routerLink]="['/Intensity/circle-list-progressive']" class="nav-item-link">List Progressive</a>
+                                        <a [queryParams]="{ company_id: companyId || '' }" [routerLink]="['/Intensity/circle-list-selected-month']" class="nav-item-link">List Selected Month</a>
+
+                                        <!-- <a routerLink="/Intensity/circle-percentage-progressive" class="nav-item-link">Percentage Progressive</a>
+                                        <a routerLink="/Intensity/circle-Percentage-selected-month" class="nav-item-link">Percentage Selected Month</a>
+                                        <a routerLink="/Intensity/circle-count-current-month" class="nav-item-link">Count Current Month</a>
+                                        <a routerLink="/Intensity/circle-count-progressive" class="nav-item-link">Count Progressive</a>
+                                        <a routerLink="/Intensity/circle-count-selected-month" class="nav-item-link">Count Selected Month</a>
+                                        <a routerLink="/Intensity/circle-count-season" class="nav-item-link">Count Season</a>
+                                        <a routerLink="/Intensity/circle-list-current-month" class="nav-item-link">List Current Month</a>
+                                        <a routerLink="/Intensity/circle-list-progressive" class="nav-item-link">List Progressive</a>
+                                        <a routerLink="/Intensity/circle-list-selected-month" class="nav-item-link">List Selected Month</a> -->
+                                        <!-- end nav item link -->
+
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- end sub accordion item 1 -->
+
+                             <!-- start sub accordion item 2 -->
+                             <div class="accordion-item">
+                              <h2 class="accordion-header" id="subNav-headingTwo">
+                                  <button class="accordion-button collapsed" type="button"
+                                      data-bs-toggle="collapse" data-bs-target="#subNav-collapseTwo"
+                                      aria-expanded="false" aria-controls="subNav-collapseTwo">
+                                      Percentage -Tehsil
+                                  </button>
+                              </h2>
+                              <div id="subNav-collapseTwo" class="accordion-collapse collapse"
+                                  aria-labelledby="subNav-headingTwo"
+                                  data-bs-parent="#accordionFlushSubNav">
+                                  <div class="accordion-body">
+                                      <!-- start nav item link -->
+                                      <a [queryParams]="{ company_id: companyId || '' }" routerLink="/Intensity/tehsil-percentage-current-month" class="nav-item-link">Percentage Current Month</a>
+                                      <a [queryParams]="{ company_id: companyId || '' }" routerLink="/Intensity/tehsil-percentage-progressive" class="nav-item-link">Percentage Progressive</a>
+                                      <a [queryParams]="{ company_id: companyId || '' }" routerLink="/Intensity/tehsil-percentage-selected-month" class="nav-item-link">Percentage Selected Month</a>
+                                      <a [queryParams]="{ company_id: companyId || '' }" routerLink="/Intensity/tehsil-count-current-month" class="nav-item-link">Count Current Month</a>
+                                      <a [queryParams]="{ company_id: companyId || '' }" routerLink="/Intensity/tehsil-count-progressive" class="nav-item-link">Count Progressive</a>
+                                      <a [queryParams]="{ company_id: companyId || '' }" routerLink="/Intensity/tehsil-count-selected-month" class="nav-item-link">Count Selected Month</a>
+                                      <a [queryParams]="{ company_id: companyId || '' }" routerLink="/Intensity/tehsil-count-season" class="nav-item-link">Count Season</a>
+                                      <a [queryParams]="{ company_id: companyId || '' }" routerLink="/Intensity/tehsil-list-current-month" class="nav-item-link">List Current Month</a>
+                                      <a [queryParams]="{ company_id: companyId || '' }" routerLink="/Intensity/tehsil-list-progressive" class="nav-item-link">List Progressive</a>
+                                      <a [queryParams]="{ company_id: companyId || '' }" routerLink="/Intensity/tehsil-list-selected-month" class="nav-item-link">List Selected Month</a>
+
+                                      <!-- <a [queryParams]="{ company_id: companyId || '' }" [routerLink]="['/Intensity/tehsil-percentage-current-month']" class="nav-item-link">Percentage Current Month</a> -->
+                                        <!-- <a routerLink="/Intensity/tehsil-percentage-current-month" class="nav-item-link">Percentage Current Month</a>
+                                        <a routerLink="/Intensity/tehsil-percentage-progressive" class="nav-item-link">Percentage Progressive</a>
+                                        <a routerLink="/Intensity/tehsil-percentage-selected-month" class="nav-item-link">Percentage Selected Month</a>
+                                        <a routerLink="/Intensity/tehsil-count-current-month" class="nav-item-link">Count Current Month</a>
+                                        <a routerLink="/Intensity/tehsil-count-progressive" class="nav-item-link">Count Progressive</a>
+                                        <a routerLink="/Intensity/tehsil-count-selected-month" class="nav-item-link">Count Selected Month</a>
+                                        <a routerLink="/Intensity/tehsil-count-season"class="nav-item-link">Count Season</a>
+                                        <a routerLink="/Intensity/tehsil-list-current-month" class="nav-item-link">List Current Month</a>
+                                        <a routerLink="/Intensity/tehsil-list-progressive" class="nav-item-link">List Progressive</a>
+                                        <a routerLink="/Intensity/tehsil-list-selected-month" class="nav-item-link">List Selected Month</a> -->
+                                        <!-- end nav item link -->
+                                  </div>
+                              </div>
+                          </div>
+                          <!-- end sub accordion item 2 -->
+
+                           <!-- start sub accordion item 3 -->
+                          <!-- start sub accordion item 3 -->
+                          <div class="accordion-item">
+                            <h2 class="accordion-header" id="subNav-headingThree">
+                                <button class="accordion-button collapsed" type="button"
+                                    data-bs-toggle="collapse" data-bs-target="#subNav-collapseThree"
+                                    aria-expanded="false" aria-controls="subNav-collapseThree">
+                                    Percentage -District
+                                </button>
+                            </h2>
+                            <div id="subNav-collapseThree" class="accordion-collapse collapse"
+                                aria-labelledby="subNav-headingThree"
+                                data-bs-parent="#accordionFlushSubNav">
+                                <div class="accordion-body">
+                                    <!-- start nav item link -->
+
+                                    <a [queryParams]="{ company_id: companyId || '' }" [routerLink]="['/Intensity/district-percentage-current-month']" class="nav-item-link">Percentage Current Month</a>
+                                    <a [queryParams]="{ company_id: companyId || '' }" [routerLink]="['/Intensity/district-percentage-progressive']" class="nav-item-link">Percentage Progressive</a>
+                                    <a [queryParams]="{ company_id: companyId || '' }" [routerLink]="['/Intensity/district-percentage-selected-month']" class="nav-item-link">Percentage Selected Month</a>
+                                    <a [queryParams]="{ company_id: companyId || '' }" [routerLink]="['/Intensity/district-count-current-month']" class="nav-item-link">Count Current Month</a>
+                                    <a [queryParams]="{ company_id: companyId || '' }" [routerLink]="['/Intensity/district-count-progressive']" class="nav-item-link">Count Progressive</a>
+                                    <a [queryParams]="{ company_id: companyId || '' }" [routerLink]="['/Intensity/district-count-selected-month']" class="nav-item-link">Count Selected Month</a>
+                                    <a [queryParams]="{ company_id: companyId || '' }" [routerLink]="['/Intensity/district-list-current-month']" class="nav-item-link">List Current Month</a>
+                                    <a [queryParams]="{ company_id: companyId || '' }" [routerLink]="['/Intensity/district-list-progressive']" class="nav-item-link">List Progressive</a>
+                                    <a [queryParams]="{ company_id: companyId || '' }" [routerLink]="['/Intensity/district-list-selectedmonth']" class="nav-item-link">List Selected Month</a>
+
+                                    <!-- <a [queryParams]="{ company_id: companyId || '' }" [routerLink]="['/Intensity/district-percentage-current-month']" class="nav-item-link">Percentage Current Month</a>
+                                    <a routerLink="/Intensity/district-percentage-current-month" class="nav-item-link">Percentage Current Month</a>
+                                    <a routerLink="/Intensity/district-percentage-progressive" class="nav-item-link">Percentage Progressive</a>
+                                    <a routerLink="/Intensity/district-percentage-selected-month" class="nav-item-link">Percentage Selected Month</a>
+                                    <a routerLink="/Intensity/district-count-current-month" class="nav-item-link">Count Current Month</a>
+                                    <a routerLink="/Intensity/district-count-progressive" class="nav-item-link">Count Progressive</a>
+                                    <a routerLink="/Intensity/district-count-selected-month" class="nav-item-link">Count Selected Month</a>
+                                    <a routerLink="/Intensity/district-list-current-month" class="nav-item-link">List Current Month</a>
+                                    <a routerLink="/Intensity/district-list-progressive" class="nav-item-link">List Progressive</a>
+                                    <a routerLink="/Intensity/district-list-selectedmonth" class="nav-item-link">List Selected Month</a> -->
+                                    <!-- end nav item link -->
+                                </div>
+                            </div>
+                        </div>
+                        <!-- end sub accordion item 3 -->
+                        <!-- end sub accordion item 3 -->
+                     <!-- start sub accordion item 4 -->
+                      <div class="accordion-item">
+                        <h2 class="accordion-header" id="subNav-headingFour">
+                            <button class="accordion-button collapsed" type="button"
+                                data-bs-toggle="collapse" data-bs-target="#subNav-collapseFour"
+                                aria-expanded="false" aria-controls="subNav-collapseFour">
+                                Percentage -Circles(District Wise)
+                            </button>
+                        </h2>
+                        <div id="subNav-collapseFour" class="accordion-collapse collapse"
+                            aria-labelledby="subNav-headingFour"
+                            data-bs-parent="#accordionFlushSubNav">
+                            <div class="accordion-body">
+                                   <a [queryParams]="{ company_id: companyId || '' }" [routerLink]="['/Intensity/circlewise-district-count-current']" class="nav-item-link">Count- Current Month</a>
+                                   <a [queryParams]="{ company_id: companyId || '' }" [routerLink]="['/Intensity/circlewise-district-count-progressive']" class="nav-item-link">Count -Progressive</a>
+                                  <!-- <a routerLink="/Intensity/circlewise-district-count-current" class="nav-item-link">Count- Current Month</a>
+                                  <a routerLink="/Intensity/circlewise-district-count-progressive" class="nav-item-link">Count -Progressive</a> -->
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end sub accordion item 4 -->
+                    </div>
+                            <!-- end sub accordion -->
+                        </div>
+                    </div>
+                </div>
+                <!-- end accordion item 2-->
+
+                <!-- start accordion item 3 -->
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="nav-headingThree">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#nav-collapseThree" aria-expanded="false"
+                            aria-controls="nav-collapseThree">
+                            <i class="bi bi-calendar pe-2"></i>Current Year Queries
+                        </button>
+                    </h2>
+                    <div id="nav-collapseThree" class="accordion-collapse collapse"
+                        aria-labelledby="nav-headingThree" data-bs-parent="#accordionFlushNav">
+                        <div class="accordion-body">
+                            <!-- start sub accordion -->
+                            <div class="accordion accordion-flush" id="accordionFlushSubNav">
+                                <!-- start sub accordion item 1-->
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="subNav-headingOne">
+                                        <button class="accordion-button collapsed" type="button"
+                                            data-bs-toggle="collapse" data-bs-target="#subNav-collapseOne"
+                                            aria-expanded="false" aria-controls="subNav-collapseOne">
+                                            Queries - Circle Wise
+                                        </button>
+                                    </h2>
+                                    <div id="subNav-collapseOne" class="accordion-collapse collapse"
+                                        aria-labelledby="subNav-headingOne"
+                                        data-bs-parent="#accordionFlushSubNav">
+                                        <div class="accordion-body">
+                                            <!-- start nav item link
+                                            current_year_queries -->
+                                            <a [routerLink]="['/current_year_queries/cir-dailyrain']" [queryParams]="{ company_id: companyId || '' }" class="nav-item-link">Daily Rain - Current Month</a>
+                                            <a [routerLink]="['/current_year_queries/cir-daily-rain-selected-month']" [queryParams]="{ company_id: companyId || '' }" class="nav-item-link">Daily Rain - Selected Month</a>
+                                            <a [routerLink]="['/current_year_queries/cir-daily-rain-Period']" [queryParams]="{ company_id: companyId || '' }" class="nav-item-link">Daily Rain - For Period</a>
+                                            <a [routerLink]="['/current_year_queries/heavy-rainfall']" [queryParams]="{ company_id: companyId || '' }" class="nav-item-link">Rainfall Heavy</a>
+                                            <a [routerLink]="['/current_year_queries/heavy-rainfall-count']" [queryParams]="{ company_id: companyId || '' }" class="nav-item-link">Rainfall Heavy count</a>
+                                            <a [routerLink]="['/current_year_queries/circle-Dryspell']" [queryParams]="{ company_id: companyId || '' }" class="nav-item-link">Dryspell</a>
+                                            <a [routerLink]="['/current_year_queries/cir-heavy-rainfall-Period']" [queryParams]="{ company_id: companyId || '' }" class="nav-item-link">Heavy Rain - For Period</a>
+
+                                            <!-- end nav item link -->
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- end sub accordion item 1-->
+                                <!-- start sub accordion item 2 -->
+                                <div class="accordion-item">
+                                  <h2 class="accordion-header" id="subNav-headingTwo">
+                                      <button class="accordion-button collapsed" type="button"
+                                          data-bs-toggle="collapse" data-bs-target="#subNav-collapseTwo"
+                                          aria-expanded="false" aria-controls="subNav-collapseTwo">
+                                          Queries - Tehsil Wise
+                                      </button>
+                                  </h2>
+                                  <div id="subNav-collapseTwo" class="accordion-collapse collapse"
+                                      aria-labelledby="subNav-headingTwo"
+                                      data-bs-parent="#accordionFlushSubNav">
+                                      <div class="accordion-body">
+                                          <!-- start nav item link -->
+                                          <a [queryParams]="{ company_id: companyId || '' }" routerLink="/current_year_queries/teh-dailyrain" class="nav-item-link">Daily Rain - Current Month</a>
+                                          <a [queryParams]="{ company_id: companyId || '' }" routerLink="/current_year_queries/tehsil-daily-rain-selected-month" class="nav-item-link">Daily Rain - Selected Month</a>
+                                          <a [queryParams]="{ company_id: companyId || '' }" routerLink="/current_year_queries/tehsil-dailyrain-for-period" class="nav-item-link">Daily Rain - for Period</a>
+                                          <a [queryParams]="{ company_id: companyId || '' }" routerLink="/current_year_queries/teh-heavyrain" class="nav-item-link">Rainfall Heavy</a>
+                                          <a [queryParams]="{ company_id: companyId || '' }" routerLink="/current_year_queries/tehsil-heavyrainfall-count" class="nav-item-link">Rainfall Heavy count</a>
+                                          <a [queryParams]="{ company_id: companyId || '' }" routerLink="/current_year_queries/tehsil-dryspell" class="nav-item-link">Dryspell</a>
+                                          <a [queryParams]="{ company_id: companyId || '' }" routerLink="/current_year_queries/tehsil-heavyrain-for-period" class="nav-item-link">Heavy Rain - for Period</a>
+                                          <a [queryParams]="{ company_id: companyId || '' }" routerLink="/current_year_queries/tehsilhq-daily-rain-current-month" class="nav-item-link">Tehsil Headquarter - Current Month</a>
+                                          <a [queryParams]="{ company_id: companyId || '' }" routerLink="/current_year_queries/tehsilhq-daily-rain-selected-month" class="nav-item-link">Tehsil Headquarter - Selected Month</a>
+
+
+
+                                          <!-- end nav item link -->
+                                      </div>
+                                  </div>
+                              </div>
+                              <!-- end sub accordion item 2 -->
+
+                              <!-- start sub accordion item 3 -->
+                              <div class="accordion-item">
+                                  <h2 class="accordion-header" id="subNav-headingThree">
+                                      <button class="accordion-button collapsed" type="button"
+                                          data-bs-toggle="collapse" data-bs-target="#subNav-collapseThree"
+                                          aria-expanded="false" aria-controls="subNav-collapseThree">
+                                          Queries - District Wise
+                                      </button>
+                                  </h2>
+                                  <div id="subNav-collapseThree" class="accordion-collapse collapse"
+                                      aria-labelledby="subNav-headingThree"
+                                      data-bs-parent="#accordionFlushSubNav">
+                                      <div class="accordion-body">
+                                          <!-- start nav item link -->
+                                          <a [queryParams]="{ company_id: companyId || '' }" routerLink="/current_year_queries/dist-dailyrain" class="nav-item-link">Daily Rain - Current Month</a>
+                                          <a [queryParams]="{ company_id: companyId || '' }" routerLink="/current_year_queries/district-dailyrain-selectedmonth" class="nav-item-link">Daily Rain - Selected Month</a>
+                                          <a [queryParams]="{ company_id: companyId || '' }" routerLink="/current_year_queries/dist-heavyrain" class="nav-item-link">Rainfall Heavy</a>
+                                          <a [queryParams]="{ company_id: companyId || '' }" routerLink="/current_year_queries/distrcit-heavy-rain-count" class="nav-item-link">Rainfall Heavy count</a>
+                                          <a [queryParams]="{ company_id: companyId || '' }" routerLink="/current_year_queries/district-dryspell" class="nav-item-link">Dryspell</a>
+                                          <a [queryParams]="{ company_id: companyId || '' }" routerLink="/current_year_queries/district-heavyrain-period" class="nav-item-link">Heavy Rain - for Period</a>
+
+
+                                          <!-- end nav item link -->
+                                      </div>
+                                  </div>
+                              </div>
+                              <!-- end sub accordion item 3 -->
+
+                              <!-- start sub accordion item 4 -->
+                              <div class="accordion-item">
+                                  <h2 class="accordion-header" id="subNav-headingFour">
+                                      <button class="accordion-button collapsed" type="button"
+                                          data-bs-toggle="collapse" data-bs-target="#subNav-collapseFour"
+                                          aria-expanded="false" aria-controls="subNav-collapseFour">
+                                          Queries - Division Wise
+                                      </button>
+                                  </h2>
+                                  <div id="subNav-collapseFour" class="accordion-collapse collapse"
+                                      aria-labelledby="subNav-headingFour"
+                                      data-bs-parent="#accordionFlushSubNav">
+                                      <div class="accordion-body">
+                                          <!-- start nav item link -->
+                                          <a [queryParams]="{ company_id: companyId || '' }" routerLink="/current_year_queries/divdaily-rain" class="nav-item-link">Daily Rain - Current Month</a>
+                                          <a [queryParams]="{ company_id: companyId || '' }" routerLink="/current_year_queries/division-daily-rain-selected-month" class="nav-item-link">Daily Rain - Selected Month</a>
+                                          <a [queryParams]="{ company_id: companyId || '' }" routerLink="/current_year_queries/div-heavyrain" class="nav-item-link">Rainfall Heavy</a>
+                                          <a [queryParams]="{ company_id: companyId || '' }" routerLink="/current_year_queries/div-heavyraincount" class="nav-item-link">Rainfall Heavy count</a>
+                                          <a [queryParams]="{ company_id: companyId || '' }" routerLink="/current_year_queries/division-Dryspell" class="nav-item-link">Dryspell</a>
+                                          <a [queryParams]="{ company_id: companyId || '' }" routerLink="/current_year_queries/division-heavyrain-period" class="nav-item-link">Heavy Rain for Period</a>
+                                          <!-- end nav item link -->
+                                      </div>
+                                  </div>
+                              </div>
+                              <!-- end sub accordion item 4 -->
+
+
+
+                            </div>
+                            <!-- end sub accordion -->
+                        </div>
+                    </div>
+                </div>
+                <!-- end accordion item 3 -->
+
+
+              <!-- start accordion item 4 -->
+                <div class="accordion-item">
+                  <h2 class="accordion-header" id="nav-headingThree">
+                      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                          data-bs-target="#nav-collapseFour" aria-expanded="false"
+                          aria-controls="nav-collapseFour">
+                          <i class="bi bi-clock pe-2"></i> Previous Year Rain
+                      </button>
+                  </h2>
+                  <div id="nav-collapseFour" class="accordion-collapse collapse"
+                      aria-labelledby="nav-headingThree" data-bs-parent="#accordionFlushNav">
+                      <div class="accordion-body">
+                          <!-- start sub accordion -->
+                          <div class="accordion accordion-flush" id="accordionFlushSubNav">
+                              <!-- start sub accordion item 1-->
+                              <div class="accordion-item">
+                                  <h2 class="accordion-header" id="subNav-headingOne">
+                                      <button class="accordion-button collapsed" type="button"
+                                          data-bs-toggle="collapse" data-bs-target="#subNav-collapseOne"
+                                          aria-expanded="false" aria-controls="subNav-collapseOne">
+                                          Past Queries - Circle Wise
+                                      </button>
+                                  </h2>
+                                  <div id="subNav-collapseOne" class="accordion-collapse collapse"
+                                      aria-labelledby="subNav-headingOne"
+                                      data-bs-parent="#accordionFlushSubNav">
+                                      <div class="accordion-body">
+                                          <!-- start nav item link -->
+                                          <!-- <a [queryParams]="{ company_id: companyId || '' }" routerLink="/circle-pastyear-dailyrain" class="nav-item-link">Daily Rain</a> -->
+                                          <a [queryParams]="{ company_id: companyId || '' }" routerLink="/circle-pastyear-dailyrain" class="nav-item-link">Daily Rain</a>
+                                          <a [queryParams]="{ company_id: companyId || '' }" routerLink="/circle-pastyear-Heavyrainfall" class="nav-item-link">Rainfall Heavy</a>
+                                          <a [queryParams]="{ company_id: companyId || '' }" routerLink="/circle-pastyear-Heavyrainfall-count" class="nav-item-link">Rainfall Heavy count</a>
+                                          <a [queryParams]="{ company_id: companyId || '' }" routerLink="/circle-pastyear-Dryspell" class="nav-item-link">Dryspell</a>
+                                          <a [queryParams]="{ company_id: companyId || '' }" routerLink="/circle-pastyear-Monthly-circle-rain" class="nav-item-link">Monthly Circle Rain</a>
+
+                                          <!-- end nav item link -->
+                                      </div>
+                                  </div>
+                              </div>
+                              <!-- end sub accordion item 1-->
+                              <!-- start sub accordion item 2 -->
+                              <div class="accordion-item">
+                                <h2 class="accordion-header" id="subNav-headingTwo">
+                                    <button class="accordion-button collapsed" type="button"
+                                        data-bs-toggle="collapse" data-bs-target="#subNav-collapseTwo"
+                                        aria-expanded="false" aria-controls="subNav-collapseTwo">
+                                        Past Queries - Tehsil Wise
+                                    </button>
+                                </h2>
+                                <div id="subNav-collapseTwo" class="accordion-collapse collapse"
+                                    aria-labelledby="subNav-headingTwo"
+                                    data-bs-parent="#accordionFlushSubNav">
+                                    <div class="accordion-body">
+                                        <!-- start nav item link -->
+                                        <a [queryParams]="{ company_id: companyId || '' }" routerLink="/tehsil-pastyear-Dailyrain" class="nav-item-link">Daily Rain</a>
+                                        <a [queryParams]="{ company_id: companyId || '' }" routerLink="/tehsil-pastyear-Heavyrainfall" class="nav-item-link">Rainfall Heavy</a>
+                                        <a [queryParams]="{ company_id: companyId || '' }" routerLink="/tehsil-pastyear-Heavyrainfall-count" class="nav-item-link">Rainfall Heavy count</a>
+                                        <a [queryParams]="{ company_id: companyId || '' }" routerLink="/tehsil-pastyear-Dryspell" class="nav-item-link">Dryspell</a>
+                                        <a [queryParams]="{ company_id: companyId || '' }" routerLink="/tehsil-pastyear-monthly-tehsil-rain" class="nav-item-link">Monthly Tehsil Rain</a>
+
+                                          <!-- <a [queryParams]="{ company_id: companyId || '' }" routerLink="/tehsil-pastyear-Dailyrain" class="nav-item-link">Daily Rain</a>
+                                          <a routerLink="/tehsil-pastyear-Heavyrainfall" class="nav-item-link">Rainfall Heavy</a>
+                                          <a routerLink="/tehsil-pastyear-Heavyrainfall-count" class="nav-item-link">Rainfall Heavy count</a>
+                                          <a routerLink="/tehsil-pastyear-Dryspell" class="nav-item-link">Dryspell</a>
+                                          <a routerLink="#" class="nav-item-link">Monthy Tehsil Rain</a> -->
+                                        <!-- end nav item link -->
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- end sub accordion item 2 -->
+
+                            <!-- start sub accordion item 3 -->
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="subNav-headingThree">
+                                    <button class="accordion-button collapsed" type="button"
+                                        data-bs-toggle="collapse" data-bs-target="#subNav-collapseThree"
+                                        aria-expanded="false" aria-controls="subNav-collapseThree">
+                                        Past Queries - District Wise
+                                    </button>
+                                </h2>
+                                <div id="subNav-collapseThree" class="accordion-collapse collapse"
+                                    aria-labelledby="subNav-headingThree"
+                                    data-bs-parent="#accordionFlushSubNav">
+                                    <div class="accordion-body">
+                                        <!-- start nav item link -->
+                                         <!-- start nav item link -->
+                                      <a [queryParams]="{ company_id: companyId || '' }" routerLink="/district-pastyear-dailyrain" class="nav-item-link">Daily Rain</a>
+                                      <a [queryParams]="{ company_id: companyId || '' }" routerLink="/district-pastyear-heavyrainfall" class="nav-item-link">Heavy Rainfall</a>
+                                      <a [queryParams]="{ company_id: companyId || '' }" routerLink="/district-pastyear-heavyrainfallcount" class="nav-item-link">Rainfall Heavy count</a>
+                                      <a [queryParams]="{ company_id: companyId || '' }" routerLink="/district-pastyear-dryspell" class="nav-item-link">Dryspell</a>
+                                      <a [queryParams]="{ company_id: companyId || '' }" routerLink="/district-past-yearmonthy-rain" class="nav-item-link">Monthly District Rain</a>
+
+                                        <!-- <a routerLink="/district-pastyear-dailyrain" class="nav-item-link">Daily Rain </a>
+                                        <a routerLink="/district-pastyear-heavyrainfall" class="nav-item-link">Heavy Rainfall </a>
+                                        <a routerLink="/district-pastyear-heavyrainfallcount" class="nav-item-link">Rainfall Heavy count</a>
+                                        <a routerLink="/district-pastyear-dryspell" class="nav-item-link">Dryspell</a>
+                                        <a routerLink="/district-past-yearmonthy-rain" class="nav-item-link">Monthly Division Rain</a> -->
+                                        <!-- end nav item link -->
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- end sub accordion item 3 -->
+
+                            <!-- start sub accordion item 4 -->
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="subNav-headingFour">
+                                    <button class="accordion-button collapsed" type="button"
+                                        data-bs-toggle="collapse" data-bs-target="#subNav-collapseFour"
+                                        aria-expanded="false" aria-controls="subNav-collapseFour">
+                                        Past Queries - Division Wise
+                                    </button>
+                                </h2>
+                                <div id="subNav-collapseFour" class="accordion-collapse collapse"
+                                    aria-labelledby="subNav-headingFour"
+                                    data-bs-parent="#accordionFlushSubNav">
+                                    <div class="accordion-body">
+                                        <!-- start nav item link -->
+                                        <a [queryParams]="{ company_id: companyId || '' }" routerLink="/division-pastyear-dailyrain" class="nav-item-link">Daily Rain</a>
+                                        <a [queryParams]="{ company_id: companyId || '' }" routerLink="/division-past-year-heavyrainfall" class="nav-item-link">Heavy Rainfall</a>
+                                        <a [queryParams]="{ company_id: companyId || '' }" routerLink="/division-past-year-heavyrainfallCount" class="nav-item-link">Rainfall Heavy count</a>
+                                        <a [queryParams]="{ company_id: companyId || '' }" routerLink="/division-past-year-Dryspell" class="nav-item-link">Dryspell</a>
+                                        <a [queryParams]="{ company_id: companyId || '' }" routerLink="/division-past-year-monthyly-division-rain" class="nav-item-link">Monthly Division Rain</a>
+
+                                        <!-- <a routerLink="/division-pastyear-dailyrain" class="nav-item-link">Daily Rain</a>
+                                        <a routerLink="/division-past-year-heavyrainfall" class="nav-item-link">Heavy Rainfall </a>
+                                        <a routerLink="/division-past-year-heavyrainfallCount" class="nav-item-link">Rainfall Heavy count</a>
+                                        <a routerLink="/division-past-year-Dryspell" class="nav-item-link">Dryspell</a>
+                                        <a routerLink="/division-past-year-monthyly-division-rain" class="nav-item-link">Monthly Division Rain</a> -->
+                                        <!-- end nav item link -->
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- end sub accordion item 4 -->
+
+                          </div>
+                          <!-- end sub accordion -->
+                      </div>
+                  </div>
+              </div>
+              <!-- end accordion item 4 -->
+
+
+               <!-- start accordion item 5 -->
+               <div class="accordion-item">
+                <h2 class="accordion-header" id="nav-headingFive">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#nav-collapseFive" aria-expanded="false"
+                        aria-controls="nav-collapseFive">
+                        <i class="bi bi-lightning-fill pe-2"></i>Previous Year Intensity
+                    </button>
+                </h2>
+                <div id="nav-collapseFive" class="accordion-collapse collapse"
+                    aria-labelledby="nav-headingFive" data-bs-parent="#accordionFlushNav">
+                    <div class="accordion-body">
+                        <!-- start sub accordion -->
+                        <div class="accordion accordion-flush" id="accordionFlushSubNav">
+                            <!-- start sub accordion item 1-->
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="subNav-headingOne">
+                                    <button class="accordion-button collapsed" type="button"
+                                        data-bs-toggle="collapse" data-bs-target="#subNav-collapseOne"
+                                        aria-expanded="false" aria-controls="subNav-collapseOne">
+                                       Intensity - circle
+                                    </button>
+                                </h2>
+                                <div id="subNav-collapseOne" class="accordion-collapse collapse"
+                                    aria-labelledby="subNav-headingOne"
+                                    data-bs-parent="#accordionFlushSubNav">
+                                    <div class="accordion-body">
+                                        <!-- start nav item link -->
+                                        <!-- <a routerLink="/Past_year_Intensity/Past-circle-intensity" class="nav-item-link">Intensity Selected Month</a>
+                                        <a routerLink="/Past_year_Intensity/Past-circle-count" class="nav-item-link">Count Selected Month</a> -->
+                                        <a [queryParams]="{ company_id: companyId || '' }" routerLink="/Past_year_Intensity/Past-circle-intensity" class="nav-item-link">Intensity Selected Month</a>
+                                        <a [queryParams]="{ company_id: companyId || '' }" routerLink="/Past_year_Intensity/Past-circle-count" class="nav-item-link">Count Selected Month</a>
+                                        <!-- end nav item link -->
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- end sub accordion item 1-->
+                            <!-- start sub accordion item 2 -->
+                            <div class="accordion-item">
+                              <h2 class="accordion-header" id="subNav-headingTwo">
+                                  <button class="accordion-button collapsed" type="button"
+                                      data-bs-toggle="collapse" data-bs-target="#subNav-collapseTwo"
+                                      aria-expanded="false" aria-controls="subNav-collapseTwo">
+                                      Intensity - Tehsil
+                                  </button>
+                              </h2>
+                              <div id="subNav-collapseTwo" class="accordion-collapse collapse"
+                                  aria-labelledby="subNav-headingTwo"
+                                  data-bs-parent="#accordionFlushSubNav">
+                                  <div class="accordion-body">
+                                      <!-- start nav item link -->
+                                      <a [queryParams]="{ company_id: companyId || '' }" routerLink="/Past_year_Intensity/Past-Tehsil-intensity" class="nav-item-link">Intensity Selected Month</a>
+                                      <a [queryParams]="{ company_id: companyId || '' }" routerLink="/Past_year_Intensity/Past-Tehsil-count" class="nav-item-link">Count Selected Month</a>
+
+                                      <!-- <a routerLink="/Past_year_Intensity/Past-Tehsil-intensity" class="nav-item-link">Intensity Selected Month</a>
+                                      <a routerLink="/Past_year_Intensity/Past-Tehsil-count" class="nav-item-link">Count Selected Month</a> -->
+
+                                      <!-- end nav item link -->
+                                  </div>
+                              </div>
+                          </div>
+                          <!-- end sub accordion item 2 -->
+
+
+
+                        </div>
+                        <!-- end sub accordion -->
+                    </div>
+                </div>
+            </div>
+            <!-- end accordion item 5 -->
+
+
+          <!-- start accordion item 6 -->
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="nav-headingSix">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                      data-bs-target="#nav-collapseSix" aria-expanded="false"
+                      aria-controls="nav-collapseSix">
+                      <i class="bi bi-bar-chart-line-fill pe-2"></i> Maps and Graphs
+                    </button>
+                  </h2>
+                      <div id="nav-collapseSix" class="accordion-collapse collapse"
+                          aria-labelledby="nav-headingSix" data-bs-parent="#accordionFlushNav">
+                          <div class="accordion-body">
+                              <!-- start sub accordion -->
+                              <div class="accordion accordion-flush" id="accordionFlushSubNav">
+                                  <!-- start sub accordion item 1-->
+                                  <div class="accordion-item">
+                                      <h2 class="accordion-header" id="subNav-headingOne">
+                                          <button class="accordion-button collapsed" type="button"
+                                              data-bs-toggle="collapse" data-bs-target="#subNav-collapseOne"
+                                              aria-expanded="false" aria-controls="subNav-collapseOne">
+                                            Rain  Maps
+                                          </button>
+                                      </h2>
+                                      <div id="subNav-collapseOne" class="accordion-collapse collapse"
+                                          aria-labelledby="subNav-headingOne"
+                                          data-bs-parent="#accordionFlushSubNav">
+                                          <div class="accordion-body">
+                                              <!-- start nav item link -->
+                                              <a [queryParams]="{ company_id: companyId || '' }" routerLink="/Maps/state-current-month" class="nav-item-link">State-current Month</a>
+                                              <a [queryParams]="{ company_id: companyId || '' }" routerLink="/Maps/state-Progressive" class="nav-item-link">State-Progressive</a>
+                                              <a [queryParams]="{ company_id: companyId || '' }" routerLink="/Maps/state-selected-month" class="nav-item-link">State-Selected Month</a>
+                                              <a [queryParams]="{ company_id: companyId || '' }" routerLink="/Maps/state-periodic" class="nav-item-link">State-Periodic Intensity</a>
+                                              <a [queryParams]="{ company_id: companyId || '' }" routerLink="/Maps/state-periodic-daily" class="nav-item-link">State-Daily</a>
+                                              <a [queryParams]="{ company_id: companyId || '' }" routerLink="/Maps/state-periodic" class="nav-item-link">State-Periodic</a>
+                                              <a [queryParams]="{ company_id: companyId || '' }" routerLink="/Maps/division-current-month" class="nav-item-link">Division-current Month</a>
+                                              <a [queryParams]="{ company_id: companyId || '' }" routerLink="/Maps/division-progressive" class="nav-item-link">Division-Progressive</a>
+                                              <a [queryParams]="{ company_id: companyId || '' }" routerLink="/Maps/division-selected-month" class="nav-item-link">Division-selected-Month</a>
+                                              <a [queryParams]="{ company_id: companyId || '' }" routerLink="/Maps/district-current-month" class="nav-item-link">District-current Month</a>
+                                              <a [queryParams]="{ company_id: companyId || '' }" routerLink="/Maps/district-progressive" class="nav-item-link">District-Progressive</a>
+                                              <a [queryParams]="{ company_id: companyId || '' }" routerLink="/Maps/district-selected-month" class="nav-item-link">District-selected Month</a>
+
+                                              <!-- <a routerLink="/Maps/state-current-month" class="nav-item-link">State-current Month</a>
+                                              <a routerLink="/Maps/state-Progressive" class="nav-item-link">State-Progressive</a>
+                                              <a routerLink="/Maps/state-Progressive" class="nav-item-link">State- Selected Month</a>
+                                              <a routerLink="/Maps/state-Progressive" class="nav-item-link">State- Periodic Intensity</a>
+                                              <a routerLink="/Maps/state-Progressive" class="nav-item-link">State- Daily</a>
+                                              <a routerLink="/Maps/state-Progressive" class="nav-item-link">State- Periodic</a>
+                                              <a routerLink="/Maps/division-current-month" class="nav-item-link">Division-current Month</a>
+                                              <a routerLink="/Maps/division-progressive" class="nav-item-link">Division-Progressive</a>
+                                              <a routerLink="/Maps/district-current-month" class="nav-item-link">Division-selected Month</a>
+                                              <a routerLink="/Maps/district-current-month" class="nav-item-link">District-Progressive</a>
+                                              <a [queryParams]="{ company_id: companyId || '' }" routerLink="/Maps/district-selected-month" class="nav-item-link">District-selected Month</a> -->
+                                              <!-- end nav item link -->
+                                          </div>
+                                      </div>
+                                  </div>
+                                  <!-- end sub accordion item 1-->
+                                    <!-- start sub accordion item 2-->
+                                    <div class="accordion-item">
+                                      <h2 class="accordion-header" id="subNav-headingTwo">
+                                          <button class="accordion-button collapsed" type="button"
+                                              data-bs-toggle="collapse" data-bs-target="#subNav-collapseTwo"
+                                              aria-expanded="false" aria-controls="subNav-collapseTwo">
+                                          Bar Graphs
+                                          </button>
+                                      </h2>
+                                      <div id="subNav-collapseTwo" class="accordion-collapse collapse"
+                                          aria-labelledby="subNav-headingTwo"
+                                          data-bs-parent="#accordionFlushSubNav">
+                                          <div class="accordion-body">
+                                          </div>
+                                      </div>
+                                  </div>
+                                  <!-- end sub accordion item 2-->
+
+                                     <!-- start sub accordion item 3-->
+
+                                     <div class="accordion-item">
+                                      <h2 class="accordion-header" id="subNav-headingThree">
+                                          <button class="accordion-button collapsed" type="button"
+                                              data-bs-toggle="collapse" data-bs-target="#subNav-collapseThree"
+                                              aria-expanded="false" aria-controls="subNav-collapseThree">
+                                          Line Graphs
+                                          </button>
+                                      </h2>
+                                      <div id="subNav-collapseThree" class="accordion-collapse collapse"
+                                          aria-labelledby="subNav-headingThree"
+                                          data-bs-parent="#accordionFlushSubNav">
+                                          <div class="accordion-body">
+                                          </div>
+                                      </div>
+                                  </div>
+                                  <!-- end sub accordion item 3-->
+                              </div>
+                              <!-- end sub accordion -->
+                          </div>
+                        </div>
+            </div>
+          <!-- end accordion item 6 -->
+
+            </div>
+            <!-- end accordion -->
+        </div>
+        <!-- start navigation -->
+    </div>
+</section>

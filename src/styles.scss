@@ -1,0 +1,274 @@
+/* You can add global styles to this file, and also import other style files */
+
+
+// theme color
+$green: #039cff;
+$orange: #F25636;
+$txt-dark: #262626;
+$txt-light: #959595;
+$border-color: #E7EAF3;
+$bg-color: #F9FAFC;
+
+$primary: $green;
+$secondary: $orange;
+
+$input-placeholder-color: $secondary;
+$input-focus-box-shadow: none;
+$input-focus-border-color: none;
+$input-font-size: 14px;
+$input-line-height: 2.3;
+
+$form-label-font-size: 14px;
+$form-label-margin-bottom: .3rem;
+
+$modal-content-border-color: unset;
+
+$table-variants: (
+  "light":      rgb(179, 198, 218),
+);
+
+
+// import bootstrap 5
+@import '../node_modules/bootstrap/scss/bootstrap.scss';
+@import '../node_modules/bootstrap-icons/font/bootstrap-icons.scss';
+
+
+//import robot google fonts
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+
+body {
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+}
+.form-select:focus {
+    outline: none;
+    box-shadow: unset;
+}
+
+table,
+th,
+td {
+    border-collapse: collapse;
+    text-align: center;
+}
+
+.user-right-side-content {
+    position: relative;
+    width: 100%;
+    margin-top: 50px;
+
+    .search-bg {
+        background-color: $white;
+        box-shadow: 0px 0px 8px rgb(0 0 0 / 9%);
+        border-radius: 12px;
+    }
+
+    .check-box-filter {
+        .form-check {
+            padding: 0px;
+
+            input {
+                margin-left: 12px;
+                margin-top: 12px;
+            }
+
+            label {
+                border: 1px solid $border-color;
+                border-radius: 5px;
+                padding: 8px 5px 8px 32px;
+                margin-bottom: 15px;
+                display: block;
+                cursor: pointer;
+                user-select: none;
+            }
+        }
+    }
+
+    .report-generated-bg {
+        border: 1px solid $gray-200;
+        border-radius: 6px;
+
+        h5 {
+            font-size: 1em;
+        }
+
+        span {
+            font-size: .9em;
+        }
+    }
+
+    .user-data-result-bg {
+        .user-data-result-header {
+            h6 {
+                font-size: 1em;
+            }
+
+            a {
+                position: relative;
+                text-decoration: none;
+                display: inline-block;
+                color: $txt-dark;
+                border: 1px solid $gray-300;
+                border-radius: 50%;
+                transition: all .5s;
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                width: 35px;
+                height: 35px;
+                white-space: nowrap;
+
+                span {
+                    position: absolute;
+                    z-index: 9;
+                    left: 50%;
+                    transform: translateX(-50%);
+                    bottom: -45px;
+                    background-color: $primary;
+                    font-size: .9em;
+                    color: $white;
+                    padding: 5px 15px;
+                    border-radius: 5px;
+                    visibility: hidden;
+                    pointer-events: none;
+
+                    &::before {
+                        content: "";
+                        position: absolute;
+                        top: -8px;
+                        left: 50%;
+                        transform: translateX(-50%);
+                        border-left: 6px solid transparent;
+                        border-right: 6px solid transparent;
+                        border-bottom: 8px solid $primary;
+                    }
+                }
+
+                &:hover {
+                    border-color: $primary;
+
+                    span {
+                        visibility: visible;
+                    }
+                }
+            }
+        }
+
+        table {
+            border-radius: 8px;
+            overflow: hidden;
+
+            thead {
+                background-color: red;
+                --background-color: red;
+            }
+
+            tbody {
+                border-top: unset;
+            }
+
+            th {
+                padding: 13px 15px;
+            }
+
+            td {
+                padding: 10px 15px;
+            }
+        }
+
+        .user-data-result-footer {
+            h6 {
+                font-size: 1em;
+            }
+        }
+    }
+
+
+    .card-weather-bg {
+        position: relative;
+        box-shadow: 0 1px 8px rgb(0 0 0 / 9%);
+        border-radius: 8px;
+
+        .weather-icon {
+            background-color: $gray-200;
+            width: 65px;
+            height: 65px;
+            border: 7px solid $gray-100;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: $primary;
+
+            i {
+                font-size: 2em;
+            }
+        }
+
+        h6 {
+            font-size: 1em;
+            color: $gray-600;
+            font-weight: 400;
+        }
+
+        h4 {
+            font-size: 1.3em;
+        }
+
+        .weather-item {
+            color: $gray-600;
+
+            i {
+                color: $gray-500;
+            }
+        }
+
+        h5 {
+            font-size: .9em;
+            margin: 3px 0px 0px;
+        }
+
+        .forecast-time {
+            font-size: .9em;
+            border-top: 1px solid $gray-200;
+            margin-top: 15px;
+            padding-top: 10px;
+
+            i {
+                color: $gray-500;
+            }
+        }
+
+        &.current {
+            background-color: $primary;
+            color: $white;
+
+            h6 {
+                color: $white;
+            }
+
+            .weather-item {
+                color: $gray-800;
+
+                i {
+                    color: $gray-800;
+                }
+            }
+        }
+    }
+}
+
+.accordion-item,
+.accordion-button {
+    background-color: rgb(233, 236, 239);
+}
+.warning {
+  background-color: $warning;
+  padding: 12px;
+  border-left: 5px solid #c87f0a;
+  color: #fff;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+}

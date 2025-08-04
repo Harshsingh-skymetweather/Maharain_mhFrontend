@@ -1,0 +1,197 @@
+<!-- start content -->
+<section class="user-right-side-content pb-5">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-lg-3 col-xl-2">
+        <app-side-navigation></app-side-navigation>
+      </div>
+    <div class="col-lg-9 col-xl-10 ps-md-4">
+    <!-- start search -->
+       <div *ngIf=" organisedData && organisedData.length">
+          <div class="search-bg px-4 pb-4 pt-2 px-lg-5 pb-lg-3 pt-lg-2 mb-3">
+          <div class="row align-items-end">
+            <div class="col-sm-6 col-md-2 mt-3">
+              <select class="form-select" (change)="getdivision(selectedDivisionCode)"
+                [(ngModel)]="selectedDivisionCode" name="selectedDivision">
+                <option value="" selected disabled>-- All Divisions --</option>
+                <option *ngFor="let division of divisions" [value]="division.division_code">
+                  {{ division.division_name }}
+                </option>
+              </select>
+            </div>
+            <div class="col-sm-6 col-md-2 mt-3">
+              <label for="" class="form-label"></label>
+              <select name="selectedMonth" class="form-select">
+                <option value="" disabled>-- For Month --</option>
+                <option value="" selected>{{currentDate | date:'MMM'}}</option>
+              </select>
+            </div>
+
+            <div class="col-sm-6 col-md-1 mt-3">
+              <div class="d-grid">
+                <button class="btn btn-primary py-2" (click)="circlePercentageIntensity()">Go</button>
+
+              </div>
+              <div >
+
+              </div>
+
+            </div>
+          </div>
+        </div>
+        <div class="report-generated-bg px-4 py-3 mb-4 bg-body-secondary">
+          <div class="row">
+            <div class="col-sm-6" *ngIf="!selDivFlag">
+              <h5 class="mb-0">Rainfall Recording & Analysis</h5>
+              <span>State :: Maharashtra Circles Wise Percentage of Rain :: (as on {{currentDate | date:'dd,MMM yyyy'}})</span>
+            </div>
+            <div class="col-sm-6" *ngIf="selDivFlag">
+              <h5 class="mb-0">Rainfall Recording & Analysis</h5>
+              <span>Division :: {{selectDivisionName}} Circles Wise Percentage of Rain :: (as on {{currentDate | date:'dd,MMM yyyy'}})</span>
+            </div>
+          </div>
+        </div>
+        <div class="btn">
+          <div class="row">
+            <div class="col-sm-6">
+              <button type="button" class="btn btn-dark ms-2" (click)="downloadPdf()">PDF</button>
+            </div>
+          </div>
+        </div>
+
+        <div id="transformDataTable" *ngIf="transformDataDiv">
+          <div class="main_content">
+            <div class="table-container">
+              <table class="table">
+                <tbody>
+                  <ng-container *ngFor="let district of organisedData; let districtIndex = index">
+                    <ng-container *ngFor="let tehsil of district.tehsils; let tehsilIndex = index">
+                      <ng-container *ngFor="let circle of tehsil.circles; let circleIndex = index">
+                        <tr *ngIf="!circle.pageBreak">
+                          <td class="name">{{ circle.circleName }}</td>
+                          <td class="value" [style.background-color]="getIntensityColor(circle.circleIntensity)">
+                            {{ circle.circleIntensity }}
+                          </td>
+                        </tr>
+                      </ng-container>
+
+                      <tr *ngIf="!tehsil.pageBreak">
+                        <td class="name"><b>T-{{ tehsil.tehsilName }}</b></td>
+                        <td class="value" [style.background-color]="getIntensityColor(tehsil.tehsilIntensity)">
+                          <b>{{ tehsil.tehsilIntensity }}</b>
+                        </td>
+                      </tr>
+
+                    </ng-container>
+
+                    <tr *ngIf="!district.pageBreak">
+                      <td class="name"><b>D-{{ district.districtName }}</b></td>
+                      <td class="value" [style.background-color]="getIntensityColor(district.districtIntensity)">
+                        <b>{{ district.districtIntensity }}</b>
+                      </td>
+                    </tr>
+
+                  </ng-container>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <table style="margin-top:100px;background-color: #fff;">
+            <tbody>
+              <tr>
+                <td style="width:80px;">Below 25%</td>
+                <td style="background-color:#FF0000; width:30px;">
+                  <div style="width:30px; border: 1px solid transparent;"></div>
+                </td>
+                <td style="width:80px;">25%-to-50%</td>
+                <td style="background-color:#EDFF00; width:30px;">
+                  <div style="width:30px; border: 1px solid transparent;"></div>
+                </td>
+                <td style="width:80px;">50%-to-75%</td>
+                <td style="background-color:#776EFE; width:30px;">
+                  <div style="width:30px; border: 1px solid transparent;"></div>
+                </td>
+                <td style="width:80px;">75%-to-100%</td>
+                <td style="background-color:#00DC67; width:30px;">
+                  <div style="width:30px; border: 1px solid transparent;"></div>
+                </td>
+                <td style="width:80px;">above 100%</td>
+                <td style="background-color:#008C0F; width:30px;">
+                  <div style="width:30px; border: 1px solid transparent;"></div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div id="circlePercentageIntensityTable" *ngIf="circlePercentageIntensityDiv">
+          <div class="main_content">
+            <div class="table-container">
+              <table class="table w-100">
+                <tbody>
+                  <ng-container *ngFor="let district of organisedData; let districtIndex = index">
+                    <ng-container *ngFor="let tehsil of district.tehsils; let tehsilIndex = index">
+                      <ng-container *ngFor="let circle of tehsil.circles; let circleIndex = index">
+                        <tr *ngIf="!circle.pageBreak">
+                          <td class="name">{{ circle.circleName }}</td>
+                          <td class="value" [style.background-color]="getIntensityColor(circle.circleIntensity)">
+                            {{ circle.circleIntensity }}
+                          </td>
+                        </tr>
+                      </ng-container>
+
+                      <tr *ngIf="!tehsil.pageBreak">
+                        <td class="name"><b>T-{{ tehsil.tehsilName }}</b></td>
+                        <td class="value" [style.background-color]="getIntensityColor(tehsil.tehsilIntensity)">
+                          <b>{{ tehsil.tehsilIntensity }}</b>
+                        </td>
+                      </tr>
+
+                    </ng-container>
+
+                    <tr *ngIf="!district.pageBreak">
+                      <td class="name"><b>D-{{ district.districtName }}</b></td>
+                      <td class="value" [style.background-color]="getIntensityColor(district.districtIntensity)">
+                        <b>{{ district.districtIntensity }}</b>
+                      </td>
+                    </tr>
+
+                  </ng-container>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <table style="margin-top:100px;background-color: #fff;" *ngIf="circlePercentageIntensityDiv">
+            <tbody>
+              <tr>
+                <td style="width:80px;">Below 25%</td>
+                <td style="background-color:#FF0000; width:30px;">
+                  <div style="width:30px; border: 1px solid transparent;"></div>
+                </td>
+                <td style="width:80px;">25%-to-50%</td>
+                <td style="background-color:#EDFF00; width:30px;">
+                  <div style="width:30px; border: 1px solid transparent;"></div>
+                </td>
+                <td style="width:80px;">50%-to-75%</td>
+                <td style="background-color:#776EFE; width:30px;">
+                  <div style="width:30px; border: 1px solid transparent;"></div>
+                </td>
+                <td style="width:80px;">75%-to-100%</td>
+                <td style="background-color:#00DC67; width:30px;">
+                  <div style="width:30px; border: 1px solid transparent;"></div>
+                </td>
+                <td style="width:80px;">above 100%</td>
+                <td style="background-color:#008C0F; width:30px;">
+                  <div style="width:30px; border: 1px solid transparent;"></div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+       </div>
+      </div>
+    </div>
+  </div>
+</section>
+

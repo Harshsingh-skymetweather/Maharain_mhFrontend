@@ -1,0 +1,259 @@
+<div class="header">
+  <nav class="navbar fixed-top pt-0">
+    <div class="container-fluid px-0 d-block">
+      <div class="row g-3">
+        <div class="col-md-4 pt-2">
+          <div class="brandLogo">
+            <a routerLink="/home"></a>
+          </div>
+        </div>
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+          <div class="logo">
+            <img src="assets/img/parternership.png" alt="partnership" class="img-fluid">
+
+            <div class="logoutBtn text-center">
+              <span class="status">Login as :</span>
+              <span class="status fw-bold px-2">{{user}}</span>
+              <span class="logout" (click)="logout()">Logout</span>
+            </div>
+          </div>
+        </div>
+        <div class=" col-md-4 mt-0">
+          <div class="iconList">
+            <span class="headerIcon" >
+              <img src="assets/img/home.png" alt="home" class="img-fluid" />
+            </span>
+
+            
+
+          <!-- //////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
+
+          <li class="nav-item dropdown headerIcon" (click)="menuToggle()" >
+            <a href="" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false"  style="width: 60px;">
+              <img src="assets/img/dropDown.png" alt="home" class="img-fluid" />         
+            </a>
+            <ul class="dropdown-menu">
+              <li class="menu-item">
+                <a routerLink="/current-Data" class="report-link">
+                  <span class="report-link-icon">
+                    <!-- <i class="bi bi-water" style="font-size: 10px; color: skyblue;"></i> -->
+                    <img src="assets/img/inactive.png" alt="AWS station icon">
+                  </span>
+                  <!-- <span   class="report-link-text">current data</span> -->
+                </a>
+              </li>
+
+              <li class="menu-item">
+                <a routerLink="/current-Data" class="report-link">
+                  <span class="report-link-icon">
+                    <!-- <i class="bi bi-water" style="font-size: 10px; color: skyblue;"></i> -->
+                    <img src="assets/img/rain.png" alt="Rainfall icon">
+                  </span>
+                  <!-- <span   class="report-link-text">current data</span> -->
+                </a>
+              </li>
+
+              <li class="menu-item">
+                <a routerLink="/current-Data" class="report-link">
+                  <span class="report-link-icon">
+                    <!-- <i class="bi bi-water" style="font-size: 10px; color: skyblue;"></i> -->
+                    <img src="assets/img/temp.png" alt="Max temp icon">
+                  </span>
+                  <!-- <span   class="report-link-text">current data</span> -->
+                </a>
+              </li>
+              <li class="menu-item">
+                <a routerLink="/current-Data" class="report-link">
+                  <span class="report-link-icon">
+                    <!-- <i class="bi bi-water" style="font-size: 10px; color: skyblue;"></i> -->
+                    <img src="assets/img/temp.png" alt="Min temp icon">
+                  </span>
+                  <!-- <span   class="report-link-text">current data</span> -->
+                </a>
+              </li>
+
+              <li class="menu-item">
+                <a routerLink="/current-Data" class="report-link">
+                  <span class="report-link-icon">
+                    <!-- <i class="bi bi-water" style="font-size: 10px; color: skyblue;"></i> -->
+                    <img src="assets/img/humidity.png" alt="Humidity icon">
+                  </span>
+                  <!-- <span   class="report-link-text">current data</span> -->
+                </a>
+              </li>
+
+
+              <li class="menu-item">
+                <a routerLink="/current-Data" class="report-link">
+                  <span class="report-link-icon">
+                    <!-- <i class="bi bi-water" style="font-size: 10px; color: skyblue;"></i> -->
+                    <img src="assets/img/wind.png" alt="Wind icon">
+                  </span>
+                  <!-- <span   class="report-link-text">current data</span> -->
+                </a>
+              </li>
+
+              <li class="menu-item">
+                <a routerLink="/current-Data" class="report-link">
+                  <span class="report-link-icon">
+                    <!-- <i class="bi bi-water" style="font-size: 10px; color: skyblue;"></i> -->
+                    <img src="assets/img/rain.png" alt="Daily rainfall icon">
+                  </span>
+                  <!-- <span   class="report-link-text">current data</span> -->
+                </a>
+              </li>
+
+              <li class="menu-item">
+                <a routerLink="/current-Data" class="report-link">
+                  <span class="report-link-icon">
+                    <!-- <i class="bi bi-water" style="font-size: 10px; color: skyblue;"></i> -->
+                    <img src="assets/img/rain.png" alt="weeakly rainfall icon">
+                  </span>
+                  <!-- <span   class="report-link-text">current data</span> -->
+                </a>
+              </li>
+
+              <li class="menu-item">
+                <a routerLink="/current-Data" class="report-link">
+                  <span class="report-link-icon">
+                    <!-- <i class="bi bi-water" style="font-size: 10px; color: skyblue;"></i> -->
+                    <img src="assets/img/rain.png" alt="monthly rainfall icon">
+                  </span>
+                  <!-- <span   class="report-link-text">current data</span> -->
+                </a>
+              </li>
+
+
+              <li class="menu-item">
+                <a routerLink="/current-Data" class="report-link">
+                  <span class="report-link-icon">
+                    <!-- <i class="bi bi-water" style="font-size: 10px; color: skyblue;"></i> -->
+                    <img src="assets/img/heat_map.png" alt="heat map icon">
+                  </span>
+                  <!-- <span   class="report-link-text">current data</span> -->
+                </a>
+              </li>
+              
+            </ul>
+          </li>
+
+
+
+
+
+
+
+
+
+
+        <!-- //////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
+           
+            <li class="nav-item dropdown headerIcon" (click)="menuToggle()" >
+              <a href="" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <img src="assets/img/list.png" alt="home" class="img-fluid" />
+              </a>
+              <ul class="dropdown-menu">
+                <li class="menu-item border-bottom">
+                  <a routerLink="/current-Data" class="report-link">
+                    <span class="report-link-icon">
+                      <i class="bi bi-sun"></i>
+                    </span>
+                    <span   class="report-link-text">current data</span>
+                  </a>
+                </li>
+                <li class="menu-item">
+                  <a routerLink="/rainfall-report" class="report-link">
+                    <span class="report-link-icon">
+                      <img src="assets/img/call-swap.svg" alt="call swap icon">
+                    </span>
+                    <span class="report-link-text">rainfall report</span>
+                  </a>
+                </li>
+                <li class="menu-item">
+                  <a routerLink="/temperature-reports" class="report-link">
+                    <span class="report-link-icon">
+                      <img src="assets/img/call-swap.svg" alt="call swap icon">
+                    </span>
+                    <span class="report-link-text">temperature report</span>
+                  </a>
+                </li>
+                <li class="menu-item border-bottom">
+                  <a routerLink="data-packet-count" class="report-link">
+                    <span class="report-link-icon">
+                      <i class="bi bi-clock"></i>
+                    </span>
+                    <span class="report-link-text">data packet count</span>
+                  </a>
+                </li>
+                <li class="menu-item border-bottom">
+                  <p class="linkGroup">summary report</p>
+                  <a routerLink="/daily-reports" class="report-link">
+                    <span class="report-link-icon">
+                      <i class="bi bi-clock"></i>
+                    </span>
+                    <span class="report-link-text">daily reports</span>
+                  </a>
+                </li>
+                <li class="menu-item border-bottom">
+                  <a routerLink="/weekly-reports" class="report-link">
+                    <span class="report-link-icon">
+                      <i class="bi bi-clock"></i>
+                    </span>
+                    <span class="report-link-text">weekly reports</span>
+                  </a>
+                </li>
+                <li class="menu-item border-bottom">
+                  <a routerLink="/daily-rain-reports" class="report-link">
+                    <span class="report-link-icon">
+                      <i class="bi bi-clock"></i>
+                    </span>
+                    <span class="report-link-text">daily rain reports</span>
+                  </a>
+                </li>
+                <li class="menu-item border-bottom">
+                  <p class="linkGroup">claim payout</p>
+                  <a routerLink="/claim-payout" class="report-link">
+                    <span class="report-link-icon">
+                      <i class="bi bi-clock"></i>
+                    </span>
+                    <span class="report-link-text">claim payout</span>
+                  </a>
+                </li>
+                <li class="menu-item border-bottom">
+                  <p class="linkGroup">crop pop</p>
+                  <a routerLink="/crop-pop" class="report-link">
+                    <span class="report-link-icon">
+                      <i class="bi bi-clock"></i>
+                    </span>
+                    <span class="report-link-text">crop pop</span>
+                  </a>
+                </li>
+                <li class="menu-item border-bottom">
+                  <p class="linkGroup">AWS</p>
+                  <a routerLink="/non-functional-aws" class="report-link">
+                    <span class="report-link-icon">
+                      <i class="bi bi-clock"></i>
+                    </span>
+                    <span class="report-link-text">non functional AWS</span>
+                  </a>
+                </li>
+                <li class="menu-item">
+                  <p class="linkGroup">crop advisory</p>
+                  <a routerLink="/crop-advisory" class="report-link">
+                    <span class="report-link-icon">
+                      <i class="bi bi-clock"></i>
+                    </span>
+                    <span class="report-link-text">crop advisory</span>
+                  </a>
+                </li>
+              </ul>
+            </li>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </nav>
+
+</div>

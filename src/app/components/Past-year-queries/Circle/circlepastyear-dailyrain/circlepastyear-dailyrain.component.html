@@ -1,0 +1,179 @@
+<!-- start content -->
+<section class="user-right-side-content pb-5">
+  <div class="container-fluid">
+      <div class="row">
+          <div class="col-lg-3 col-xl-2">
+             <app-side-navigation></app-side-navigation>
+          </div>
+          <div class="col-lg-9 col-xl-10 ps-md-4">
+
+          <!-- start search -->
+          <div class="search-bg px-4 pb-4 pt-2 px-lg-5 pb-lg-3 pt-lg-2 mb-3">
+            <div class="row align-items-end">
+              <div class="col-sm-6 col-md-2 mt-3">
+                <select name="selectedYear" class="form-select" [(ngModel)]="selectedYear" (change)="onYearChange()">
+                  <option value="">-- Select Year --</option>
+                  <option *ngFor="let year of years" [value]="year">{{year}}</option>
+                </select>
+              </div>
+                <div class="col-sm-6 col-md-2 mt-3">
+                    <select name="" id="" class="form-select" [(ngModel)]="selectedState">
+                      <option value="">-- State --</option>
+                        <option value="Maharashtra">Maharashtra</option>
+                    </select>
+                </div>
+                <div class="col-sm-6 col-md-2 mt-3">
+                  <select name="selectedDivision" class="form-select" (change)="onChangedivision($event)" [(ngModel)]="selectedDivision">
+                    <option value="">-- All Divisions --</option>
+                    <option *ngFor="let division of divisions" [value]="division.division_code">
+                      {{ division.division_name }}
+                    </option>
+                  </select>
+                </div>
+                <div class="col-sm-6 col-md-2 mt-3">
+                  <select  name="selectedDistrict" class="form-select" [(ngModel)]="selectedDistrict">
+                      <option  value="">-- All districts --</option>
+                      <option *ngFor ="let item of districts" [value]="item.district">{{item.district_name}}</option>
+                  </select>
+              </div>
+                <div class="col-sm-6 col-md-2 mt-3">
+                  <select name="selectedMonth" class="form-select" [(ngModel)]="selectedMonth" [disabled]="!selectedYear" (change)="onMonthChange()">
+                    <option value="">-- For Month --</option>
+                    <option *ngFor="let month of months" [value]="month.value">{{month.name}}</option>
+                  </select>
+                </div>
+
+                <div class="col-sm-6 col-md-1 mt-3">
+                    <div class="d-grid">
+                        <button class="btn btn-primary py-2" (click)="onSubmit()" [disabled]="!selectedYear || !selectedMonth">Go</button>
+                    </div>
+                </div>
+            </div>
+          </div>
+          <!-- end search -->
+
+              <!-- start result -->
+              <div  *ngIf="result.length">
+                <!-- start report generated -->
+                <div class="report-generated-bg px-4 py-3 mb-4 bg-body-secondary">
+                  <div *ngIf="selectedDivision!='' && selectedDistrict!=''" class="row">
+                      <div class="col-sm-6">
+                          <h5 class="mb-0">Rainfall Recording & Analysis</h5>
+                          <span>Circles wise rainfall for district <b>{{ getDistrictName(selectedDistrict) }}</b> of division <b>{{ getDivisionName(selectedDivision) }}</b> (as on {{ today | date:'dd-MMM-yyyy' }})</span>
+                        </div>
+                        <div class="col-sm-6 text-end">
+                          <span>Generated at:{{today | date:'dd-MMMM-yyyy h:mm a'}} </span>
+                          <br>
+                          <span>(Rainfall in mm)</span>
+                        </div>
+                  </div>
+                  <div *ngIf="selectedDivision!='' && selectedDistrict==''" class="row">
+                    <div class="col-sm-6">
+                      <h5 class="mb-0">Rainfall Recording & Analysis</h5>
+                      <span>Circles wise rainfall for all districts of  division <b>{{ getDivisionName(selectedDivision) }}</b> (as on {{ today | date:'dd-MMM-yyyy' }})</span>
+                    </div>
+                    <div class="col-sm-6 text-end">
+                      <span>Generated at:{{today | date:'dd-MMMM-yyyy h:mm a'}} </span>
+                      <br>
+                      <span>(Rainfall in mm)</span>
+                    </div>
+                  </div>
+                    <div *ngIf="selectedDivision=='' && selectedDistrict==''" class="row">
+                        <div class="col-sm-6">
+                            <h5 class="mb-0">Rainfall Recording & Analysis</h5>
+                            <span>Circles wise rainfall for <b>Maharashtra</b> State (as on {{ today | date:'dd-MMM-yyyy' }})</span>
+                          </div>
+                          <div class="col-sm-6 text-end">
+                            <span>Generated at:{{today | date:'dd-MMMM-yyyy h:mm a'}} </span>
+                            <br>
+                          <span>(Rainfall in mm)</span>
+                    </div>
+                </div>
+                </div>
+                <!-- start report generated -->
+
+                <!-- start result -->
+                <div   class="user-data-result-bg">
+                    <div class="user-data-result-header mb-3">
+                        <div class="row align-items-center">
+                            <div class="col">
+                              <button id="download-pdf" type="button" class="btn btn-dark me-2" (click)="downloadPdf()">Pdf</button>
+                              <button type="button" class="btn btn-dark ms-2" (click)="downloadExcel()">Excel</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="table-responsive">
+                      <table class="table table-bordered">
+                        <thead class="table-light">
+                          <tr>
+                              <th>Sr</th>
+                              <th>District</th>
+                              <th>Taluka</th>
+                              <th>Circle</th>
+                              <th>Taluka Normal Rainfall</th>
+                              <ng-container *ngFor="let dd of dates">
+                                <th>{{dd}}</th>
+                              </ng-container>
+                              <th>Total Rainfall</th>
+                              <th>% Rainfall</th>
+                              <th>Rainy Days</th>
+                          </tr>
+
+                      </thead>
+                      <tbody>
+                          <ng-container *ngFor="let district of result">
+                            <ng-container *ngFor="let teh of district.tehsils; ">
+                              <ng-container *ngFor="let cir of teh.circles;let idx = index ">
+                                <tr>
+                                  <td>{{idx + 1}}</td>
+                                  <td>{{ idx + 1 === 1 ? district.Districtname : '\u00A0' }}</td>
+                                  <td>{{ idx + 1 === 1 ? teh.Tehsilname : '\u00A0' }}</td>
+                                  <td>{{ cir.circlename }}</td>
+                                  <td>{{ teh.Normal }}</td>
+                                  <ng-container *ngFor="let dd of dates">
+                                  <td>{{ getRainValuecircle(cir, dd)  }} </td>
+                                  </ng-container>
+                                  <td>{{ getcircleTotalRain(cir) | number: '1.1-1' }}</td>
+                                  <td>
+                                  {{  getPercentageforcircle(teh) | number: '1.1-1' }}
+                              </td>
+                                  <td>{{ getRainyDaysForCircle(cir) | number: '1.1-1' }}</td>
+                              </tr>
+                            </ng-container>
+                              <tr>
+                                <th></th>
+                                <th colspan="3">T- {{ teh.Tehsilname }}</th>
+                                <th>{{ teh.Normal }}</th>
+                                <ng-container *ngFor="let dd of dates">
+                                <th>{{ getRainValueForTehsil(teh, dd) | number: '1.1-1' }} </th>
+                                </ng-container>
+                                <th>{{ getTehsilTotalRain(teh) | number: '1.1-1' }}</th>
+                                <th>{{ getPercentageForTehsil(teh) | number: '1.1-1' }}</th>
+                                <th>{{ getRainyDaysForTehsil(teh) | number: '1.1-1' }}</th>
+                              </tr>
+                          </ng-container>
+                            <tr>
+                              <th colspan="4">District -{{ district.Districtname }}</th>
+                              <th>{{ district.Normal }}</th>
+                               <ng-container *ngFor="let dd of dates">
+                              <th>{{ getRainValueForDistrict(district, dd) | number: '1.1-1' }} </th>
+                              </ng-container>
+                              <th>{{ getDistrictTotalRain(district) | number: '1.1-1' }}</th>
+                              <th>{{ getPercentageForDistrict(district) | number: '1.1-1' }}</th>
+                              <th>{{ getRainyDaysForDistrict(district) | number: '1.1-1' }}</th>
+                            </tr>
+                        </ng-container>
+                      </tbody>
+                    </table>
+                    </div>
+                </div>
+                <!-- end result -->
+              </div>
+              <!-- end result -->
+          </div>
+      </div>
+  </div>
+</section>
+<!-- end content -->
+
+

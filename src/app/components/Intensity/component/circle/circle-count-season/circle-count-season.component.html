@@ -1,0 +1,113 @@
+<!-- start content -->
+<section class="user-right-side-content pb-5">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-lg-3 col-xl-2">
+        <app-side-navigation></app-side-navigation>
+      </div>
+
+      <div class="col-lg-9 col-xl-10 ps-md-4">
+        <div *ngIf="report && report.length">
+          <div class="report-generated-bg px-4 py-3 mb-4 bg-body-secondary">
+            <div class="row">
+              <h5 class="mb-0">Rainfall Recording & Analysis</h5>
+              <span>Classification of Circles According to Percentage of Rainfall for Season</span>
+            </div>
+          </div>
+
+          <div class="user-data-result-bg">
+            <div class="user-data-result-header mb-3">
+              <div class="row align-items-center">
+                <div class="col">
+                  <button id="download-pdf" type="button" class="btn btn-dark me-2" (click)="downloadPdf()">Pdf</button>
+                  <button type="button" class="btn btn-dark ms-2" (click)="downloadExcel()">Excel</button>
+                </div>
+              </div>
+            </div>
+            <div class="table-responsive">
+              <table class="table table-bordered">
+                <thead class="table-light">
+                  <tr>
+                    <th rowspan="2">Sr</th>
+                    <th rowspan="2">District</th>
+                    <ng-container *ngFor="let month of availableMonths">
+                      <th colspan="5">{{ getMonthName(month) }}</th>
+                    </ng-container>
+                    <th colspan="5">1st Jun to till date</th>
+                  </tr>
+                  <tr>
+                    <ng-container *ngFor="let month of availableMonths">
+                      <th>below 25%</th>
+                      <th>25%-50%</th>
+                      <th>50%-75%</th>
+                      <th>75%-100%</th>
+                      <th>100% Above</th>
+                    </ng-container>
+                    <th>below 25%</th>
+                    <th>25%-50%</th>
+                    <th>50%-75%</th>
+                    <th>75%-100%</th>
+                    <th>100% Above</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <ng-container *ngFor="let divisionData of report; let divisionIndex = index">
+                    <tr *ngFor="let district of divisionData.districts; let districtIndex = index">
+                      <td>{{ districtIndex + 1 }}</td>
+                      <td>{{ district.district }}</td>
+                      <ng-container *ngFor="let month of availableMonths">
+                        <td>{{ district.months['month_' + month]?.below25 !== 0 ? district.months['month_' + month]?.below25 : '-' }}</td>
+                        <td>{{ district.months['month_' + month]?.['25-50'] !== 0 ? district.months['month_' + month]?.['25-50'] : '-' }}</td>
+                        <td>{{ district.months['month_' + month]?.['50-75'] !== 0 ? district.months['month_' + month]?.['50-75'] : '-' }}</td>
+                        <td>{{ district.months['month_' + month]?.['75-100'] !== 0 ? district.months['month_' + month]?.['75-100'] : '-' }}</td>
+                        <td>{{ district.months['month_' + month]?.['100above'] !== 0 ? district.months['month_' + month]?.['100above'] : '-' }}</td>
+                      </ng-container>
+                      <td>{{ district.overallSum.below25 !== 0 ? district.overallSum.below25 : '-' }}</td>
+                      <td>{{ district.overallSum['25-50'] !== 0 ? district.overallSum['25-50'] : '-' }}</td>
+                      <td>{{ district.overallSum['50-75'] !== 0 ? district.overallSum['50-75'] : '-' }}</td>
+                      <td>{{ district.overallSum['75-100'] !== 0 ? district.overallSum['75-100'] : '-' }}</td>
+                      <td>{{ district.overallSum['100above'] !== 0 ? district.overallSum['100above'] : '-' }}</td>
+                    </tr>
+                    <tr>
+                      <th></th>
+                      <th>Division - {{ divisionData.division }}</th>
+                      <ng-container *ngFor="let month of availableMonths">
+                        <th>{{ calculateColumnSum(divisionData.districts, 'below25', 'month_' + month) !== 0 ? calculateColumnSum(divisionData.districts, 'below25', 'month_' + month) : '-' }}</th>
+                        <th>{{ calculateColumnSum(divisionData.districts, '25-50', 'month_' + month) !== 0 ? calculateColumnSum(divisionData.districts, '25-50', 'month_' + month) : '-' }}</th>
+                        <th>{{ calculateColumnSum(divisionData.districts, '50-75', 'month_' + month) !== 0 ? calculateColumnSum(divisionData.districts, '50-75', 'month_' + month) : '-' }}</th>
+                        <th>{{ calculateColumnSum(divisionData.districts, '75-100', 'month_' + month) !== 0 ? calculateColumnSum(divisionData.districts, '75-100', 'month_' + month) : '-' }}</th>
+                        <th>{{ calculateColumnSum(divisionData.districts, '100above', 'month_' + month) !== 0 ? calculateColumnSum(divisionData.districts, '100above', 'month_' + month) : '-' }}</th>
+                      </ng-container>
+                      <th>{{ calculateDivisionOverallSum(divisionData.districts, 'below25') !== 0 ? calculateDivisionOverallSum(divisionData.districts, 'below25') : '-' }}</th>
+                      <th>{{ calculateDivisionOverallSum(divisionData.districts, '25-50') !== 0 ? calculateDivisionOverallSum(divisionData.districts, '25-50') : '-' }}</th>
+                      <th>{{ calculateDivisionOverallSum(divisionData.districts, '50-75') !== 0 ? calculateDivisionOverallSum(divisionData.districts, '50-75') : '-' }}</th>
+                      <th>{{ calculateDivisionOverallSum(divisionData.districts, '75-100') !== 0 ? calculateDivisionOverallSum(divisionData.districts, '75-100') : '-' }}</th>
+                      <th>{{ calculateDivisionOverallSum(divisionData.districts, '100above') !== 0 ? calculateDivisionOverallSum(divisionData.districts, '100above') : '-' }}</th>
+                    </tr>
+                  </ng-container>
+                  <tr>
+                    <th></th>
+                    <th>Total -</th>
+                    <ng-container *ngFor="let month of availableMonths">
+                      <th>{{ calculateOverallSum('below25', 'month_' + month) !== 0 ? calculateOverallSum('below25', 'month_' + month) : '-' }}</th>
+                      <th>{{ calculateOverallSum('25-50', 'month_' + month) !== 0 ? calculateOverallSum('25-50', 'month_' + month) : '-' }}</th>
+                      <th>{{ calculateOverallSum('50-75', 'month_' + month) !== 0 ? calculateOverallSum('50-75', 'month_' + month) : '-' }}</th>
+                      <th>{{ calculateOverallSum('75-100', 'month_' + month) !== 0 ? calculateOverallSum('75-100', 'month_' + month) : '-' }}</th>
+                      <th>{{ calculateOverallSum('100above', 'month_' + month) !== 0 ? calculateOverallSum('100above', 'month_' + month) : '-' }}</th>
+                    </ng-container>
+                    <th>{{ calculateOverallSumAllMonths('below25') !== 0 ? calculateOverallSumAllMonths('below25') : '-' }}</th>
+                    <th>{{ calculateOverallSumAllMonths('25-50') !== 0 ? calculateOverallSumAllMonths('25-50') : '-' }}</th>
+                    <th>{{ calculateOverallSumAllMonths('50-75') !== 0 ? calculateOverallSumAllMonths('50-75') : '-' }}</th>
+                    <th>{{ calculateOverallSumAllMonths('75-100') !== 0 ? calculateOverallSumAllMonths('75-100') : '-' }}</th>
+                    <th>{{ calculateOverallSumAllMonths('100above') !== 0 ? calculateOverallSumAllMonths('100above') : '-' }}</th>
+                  </tr>
+                </tbody>
+              </table>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,44 @@
+<!-- start content -->
+<section class="user-right-side-content pb-5">
+  <div class="container-fluid">
+      <div class="row">
+           <div >
+             <div >
+                <div class="user-data-result-bg">
+                    <div class="user-data-result-header mb-3">
+                        <div class="row align-items-center">
+                        </div>
+                    </div>
+                    <div class="table-responsive">
+                      <table class="table table-bordered">
+                        <thead class="table-light">
+                          <tr>
+                              <th>State</th>
+                              <th>District</th>
+                              <th>TEHSIL</th>
+                              <th>Revenue Circle</th>
+                              <th>Location</th>
+                              <th>Date</th>
+                              <th>Packet Count</th>
+                          </tr>
+                      </thead>
+                      <tbody>
+                        <tr *ngFor="let data of report let idx = index">
+                          <td>{{ data.STATE}}</td>
+                          <td>{{ data.DISTRICT }}</td>
+                          <td>{{ data.TEHSIL }}</td>
+                          <td>{{ data.REVENUE_CIRCLE }}</td>
+                          <td>{{ data.STATION_NAME }}</td>
+                          <td>{{ data.datadate }}</td>
+                          <td>{{ data.count }}</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                    </div>
+                </div>
+            </div>
+          </div>
+      </div>
+  </div>
+</section>
+<!-- end content -->

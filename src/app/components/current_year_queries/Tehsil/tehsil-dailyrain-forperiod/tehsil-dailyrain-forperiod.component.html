@@ -1,0 +1,150 @@
+<!-- start content -->
+<section class="user-right-side-content pb-5">
+  <div class="container-fluid">
+      <div class="row">
+          <div class="col-lg-3 col-xl-2">
+             <app-side-navigation></app-side-navigation>
+          </div>
+          <div class="col-lg-9 col-xl-10 ps-md-4">
+              <!-- start search -->
+              <div class="search-bg px-4 pb-4 pt-2 px-lg-5 pb-lg-3 pt-lg-2 mb-3">
+                <div class="row align-items-end">
+                    <div class="col-sm-6 col-md-2 mt-3">
+                        <select name="" id="" class="form-select" [(ngModel)]="selectedState">
+                          <option value="">-- State --</option>
+                            <option value="Maharashtra">Maharashtra</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-6 col-md-2 mt-3">
+                      <select name="selectedDivision" class="form-select" (change)="onChangedivision($event)" [(ngModel)]="selectedDivision">
+                        <option value="">-- All Divisions --</option>
+                        <option *ngFor="let division of divisions" [value]="division.division_code">
+                          {{ division.division_name }}
+                        </option>
+                      </select>
+                    </div>
+                    <div class="col-sm-6 col-md-2 mt-3">
+                      <select  name="selectedDistrict" class="form-select" [(ngModel)]="selectedDistrict">
+                          <option  value="">-- All districts --</option>
+                          <option *ngFor ="let item of districts" [value]="item.district">{{item.district_name}}</option>
+                      </select>
+                  </div>
+
+                 <div class="col-sm-6 col-md-2 mt-3">
+                  <div class="input-group">
+                    <input type="date" class="form-control" placeholder="From Date"[(ngModel)]="fromDate">
+                  </div>
+                </div>
+
+                <div class="col-sm-6 col-md-2 mt-3">
+                  <div class="input-group">
+                    <input type="date" class="form-control" placeholder="To Date" [(ngModel)]="toDate " [max]="todayDate">
+                  </div>
+                </div>
+                    <div class="col-sm-6 col-md-1 mt-3">
+                        <div class="d-grid">
+                             <button class="btn btn-primary py-2" (click)="onSubmit()">Go</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- end search -->
+            <div *ngIf="reports.length">
+            <div class="report-generated-bg px-4 py-3 mb-4 bg-body-secondary">
+              <div *ngIf="selectedDivision!='' && selectedDistrict!=''" class="row">
+                   <div class="col-sm-6">
+                      <h5 class="mb-0">Rainfall Recording & Analysis</h5>
+                      <span>Tehsils wise rainfall for district <b>{{ getDistrictName(selectedDistrict) }}</b> of division <b>{{ getDivisionName(selectedDivision) }}</b> (as on {{ today | date:'dd-MMM-yyyy' }})</span>
+                    </div>
+                    <div class="col-sm-6 text-end">
+                      <span>Generated at:{{today | date:'dd-MMMM-yyyy h:mm a'}} </span>
+                      <br>
+                      <span>(Rainfall in mm)</span>
+                    </div>
+              </div>
+              <div *ngIf="selectedDivision!='' && selectedDistrict==''" class="row">
+                <div class="col-sm-6">
+                  <h5 class="mb-0">Rainfall Recording & Analysis</h5>
+                  <span>Tehsils wise rainfall for all districts of  division <b>{{ getDivisionName(selectedDivision) }}</b> (as on {{ today | date:'dd-MMM-yyyy' }})</span>
+                </div>
+                <div class="col-sm-6 text-end">
+                  <span>Generated at:{{today | date:'dd-MMMM-yyyy h:mm a'}} </span>
+                  <br>
+                  <span>(Rainfall in mm)</span>
+                </div>
+              </div>
+                <div *ngIf="selectedDivision=='' && selectedDistrict==''" class="row">
+                    <div class="col-sm-6">
+                        <h5 class="mb-0">Rainfall Recording & Analysis</h5>
+                        <span>Tehsils wise rainfall for <b>Maharashtra</b> State (as on {{ today | date:'dd-MMM-yyyy' }})</span>
+                      </div>
+                      <div class="col-sm-6 text-end">
+                        <span>Generated at:{{today | date:'dd-MMMM-yyyy h:mm a'}} </span>
+                        <br>
+                      <span>(Rainfall in mm)</span>
+                </div>
+            </div>
+            </div>
+
+              <!-- start result -->
+              <div class="user-data-result-bg">
+                  <div class="user-data-result-header mb-3">
+                      <div class="row align-items-center">
+                          <div class="col">
+                            <button id="download-pdf" type="button" class="btn btn-dark me-2" (click)="downloadPdf()">Pdf</button>
+                            <button type="button" class="btn btn-dark ms-2" (click)="downloadExcel()">Excel</button>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="table-responsive">
+                      <table class="table table-bordered">
+                        <thead class="table-light">
+                          <tr>
+                            <th rowspan="2">Sr</th>
+                            <th rowspan="2">Tehsil</th>
+                            <ng-container *ngFor="let month of months">
+                              <th [attr.colspan]="month.days.length">{{ month.name }}</th>
+                            </ng-container>
+                            <th rowspan="2">Total Rainy Days</th>
+                          </tr>
+                          <tr>
+                            <ng-container *ngFor="let month of months">
+                              <ng-container *ngFor="let day of month.days">
+                                <th>{{ day }}</th>
+                              </ng-container>
+                            </ng-container>
+                          </tr>
+                        </thead>
+                      <tbody>
+                          <ng-container *ngFor="let dist of reports;">
+                            <ng-container *ngFor="let teh of dist.Tehsils; let idx = index">
+                              <tr>
+                                <td>{{ idx + 1 }}</td>
+                                 <td>{{ teh.TehsilName }}</td>
+                                 <ng-container *ngFor="let dd of teh.DateData">
+                                  <td>{{dd.rain}}</td>
+                                </ng-container>
+                                <td>{{ getRainyDaysForTehsil(teh) | number: '1.1-1' }}</td>
+                             </tr>
+                          </ng-container>
+                            <tr>
+                              <th></th>
+                               <th>District -{{ dist.DistrictName }}</th>
+                               <ng-container *ngFor="let distrain of dist.DateData">
+                                <th>{{distrain.rain}}</th>
+                              </ng-container>
+                              <th>{{ getRainyDaysForDistrict(dist) | number: '1.1-1' }}</th>
+                           </tr>
+                        </ng-container>
+
+                      </tbody>
+                    </table>
+                  </div>
+              </div>
+
+            </div>
+          </div>
+      </div>
+  </div>
+</section>
+<!-- end content -->

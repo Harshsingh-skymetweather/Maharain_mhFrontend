@@ -1,0 +1,91 @@
+@import '../../../styles.scss';
+
+.sub-side-navigation-bg {
+    background-color: rgb(233, 236, 239);
+    box-shadow: 0px 0px 11px rgb(0 0 0 / 9%);
+    border-radius: 12px;
+    //height: calc(100vh - 100px);
+    position: sticky;
+    top: 30px;
+
+    .nav-search-bar {
+        position: relative;
+        height: 45px;
+
+        input {
+            width: 100%;
+            border: 1px solid $gray-400;
+            border-radius: 100px;
+
+            &:focus {
+                box-shadow: none;
+                outline: 0;
+            }
+        }
+
+        i {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            right: 15px;
+            color: $gray-500;
+        }
+    }
+
+    .sub-side-navigation {
+
+        .accordion-button:not(.collapsed) {
+            color: $txt-dark;
+            background-color: #e9ecef;
+            box-shadow: unset;
+        }
+
+        .accordion-button {
+            padding: .7rem 0.85rem;
+            font-size: .7rem;
+        }
+
+        .accordion-body {
+            background-color: rgb(233, 236, 239);
+            border-radius: 6px;
+            padding: .1rem .1rem;
+            border: 1px solid $white;
+
+            .accordion-item {
+                background-color:rgb(233, 236, 239);
+                border: unset;
+                border-radius: 4px;
+            }
+
+            .nav-item-link {
+                display: block;
+                background-color: #e9ecef;
+                padding: .3rem 0.85rem;
+                color: $txt-dark;
+                text-decoration: none;
+                margin-top: 8px;
+                margin-left: 4px;
+                border-radius: 4px;
+                transition: all .5s;
+                font-size: 12px;
+
+                &:hover {
+                    color: $white;
+                    background-color: $primary;
+                }
+            }
+        }
+    }
+
+    .sub-side-navigation-notes {
+        background-color: $gray-200;
+        border-radius: 6px;
+        position: absolute;
+        bottom: 15px;
+        left: 15px;
+        right: 15px;
+        font-size: .9em;
+        height: 160px;
+        overflow-y: auto;
+    }
+}

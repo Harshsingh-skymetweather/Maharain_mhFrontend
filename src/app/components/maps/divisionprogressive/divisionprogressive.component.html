@@ -1,0 +1,37 @@
+<!-- start content -->
+<section class="user-right-side-content pb-5">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-lg-3 col-xl-2">
+        <app-side-navigation></app-side-navigation>
+      </div>
+      <div class="col-lg-9 col-xl-10 ps-md-4">
+        <div class="row align-items-end">
+          <div class="col-sm-6 col-md-2 mt-3">
+            <select name="selectedDivision" class="form-select" [(ngModel)]="selectedDivision">
+              <option value="">-- All Divisions --</option>
+              <option *ngFor="let division of divisions" [value]="division.division_code">
+                {{ division.division_name }}
+              </option>
+            </select>
+          </div>
+          <div class="col-sm-6 col-md-1 mt-3">
+            <div class="d-grid">
+              <button class="btn btn-primary py-2" (click)="onSubmit()">Go</button>
+            </div>
+          </div>
+        </div>
+        <div class="map-container">
+          <div class="title">
+            <h5 class=" fs-6 text-black">
+              {{title}}
+            </h5>
+          </div>
+          <div id="map" style="width: 100%; height: 640px; position: relative; resize: both;">
+            <div id="legend" style="position: absolute; right: 10px; ">45%</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

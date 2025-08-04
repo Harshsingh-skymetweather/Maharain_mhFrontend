@@ -1,0 +1,87 @@
+<!-- start content -->
+<section class="user-right-side-content pb-5">
+  <div class="container-fluid">
+      <div class="row">
+          <div class="col-lg-3 col-xl-2">
+             <app-side-navigation></app-side-navigation>
+          </div>
+          <div class="col-lg-9 col-xl-10 ps-md-4">
+          <!-- start search -->
+          <div *ngIf="junereports.length">
+            <!-- start report generated -->
+            <div class="report-generated-bg px-4 py-3 mb-4 bg-body-secondary">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <h5 class="mb-0">Rainfall Recording & Analysis</h5>
+                        <span>Division wise rainfall for <b>Maharashtra</b> State (as on {{ today | date: 'dd-MM-yyyy' }})</span>
+                    </div>
+                    <div class="col-sm-6">
+                        <span>Generated at: {{ today | date: 'dd-MMM-yyyy' }} (Rainfall in mm)</span>
+                        <h5 class="mb-0"></h5>
+                    </div>
+                </div>
+            </div>
+              <!-- start report generated -->
+
+              <!-- start result -->
+              <div class="user-data-result-bg">
+                  <div class="user-data-result-header mb-3">
+                      <div class="row align-items-center">
+                          <div class="col">
+                            <button id="download-pdf" type="button" class="btn btn-dark me-2" (click)="downloadPdf()">Pdf</button>
+                            <button type="button" class="btn btn-dark ms-2" (click)="downloadExcel()">Excel</button>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="table-responsive">
+                    <table class="table table-bordered">
+                      <thead class="table-light">
+                        <tr>
+                          <th rowspan="2">Sr</th>
+                          <th rowspan="2">Circles/Taluka</th>
+                          <ng-container *ngFor="let month of months">
+                            <th colspan="3">{{ month }}</th>
+                          </ng-container>
+                        </tr>
+                        <tr>
+                          <ng-container *ngFor="let month of months">
+                            <th>Division Normal Rainfall</th>
+                            <th>Actual Rainfall</th>
+                            <th>% To Normal</th>
+                          </ng-container>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr *ngFor="let division of junereports let idx = index">
+                          <td>{{ idx + 1 }}</td>
+                          <td>{{ division.DivisionName }}</td>
+                          <ng-container *ngFor="let monthData of division.monthlyData">
+                            <td>{{ monthData.normalRainfall | number: '1.1-1'}}</td>
+                            <td>{{ monthData.progressive | number: '1.1-1'}}</td>
+                            <td>{{ monthData.percentToNormal | number: '1.1-1'}}</td>
+                          </ng-container>
+
+                        </tr>
+                        <tr>
+                          <th></th>
+                          <th>
+                            {{ statereports.state.includes('0') || statereports.state.includes('1') || statereports.state.includes('2') || statereports.state.includes('3') || statereports.state.includes('4') || statereports.state.includes('5') || statereports.state.includes('6') || statereports.state.includes('7') || statereports.state.includes('8') || statereports.state.includes('9') ? 'Maharashtra' : statereports.state }}
+                          </th>
+                          <ng-container *ngFor="let monthData of statereports.monthlyData">
+                            <th>{{ monthData.normalRainfall | number: '1.1-1'}}</th>
+                            <th>{{ monthData.progressive | number: '1.1-1'}}</th>
+                            <th>{{ monthData.percentToNormal | number: '1.1-1'}}</th>
+                          </ng-container>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+              </div>
+              <!-- end result -->
+          </div>
+          </div>
+      </div>
+  </div>
+</section>
+<!-- end content -->
+

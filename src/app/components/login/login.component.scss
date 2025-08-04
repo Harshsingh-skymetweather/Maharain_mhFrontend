@@ -1,0 +1,38 @@
+@import '../../../styles.scss';
+
+.mainSection {
+    .header {
+        position: relative;
+        padding: 15px 10px 40px;
+
+        .logo {
+            width: 35%;
+        }
+        &::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            height: 40px;
+            background-color: $primary;
+        }
+    }
+    .mainContent {
+        .bodyContent {
+
+            .info {
+                .bodyText {
+                    font-size: 14px;
+                    color: #333;
+                }
+            }
+
+            form {
+                padding: 30px;
+                border: 1px solid #ccc;
+            }
+        }
+    }
+}

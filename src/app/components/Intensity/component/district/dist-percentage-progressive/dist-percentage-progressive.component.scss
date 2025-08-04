@@ -1,0 +1,42 @@
+.btn {
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+.table {
+  border-collapse: collapse;
+  width: 100%;
+  empty-cells: hide;
+}
+
+.table td, .table th {
+  //border: 2px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+th, td {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+  vertical-align: top;
+}
+
+.table  {
+  font-weight: light;
+  font-size: 12px;
+}
+
+.table .value {
+  font-size: 12px;
+  display: right;
+  empty-cells: hide;
+}
+
+.divisiondiv {
+  border-collapse: collapse;
+  empty-cells: hide;
+}
+
+.division-start {
+  border-top: none;
+}

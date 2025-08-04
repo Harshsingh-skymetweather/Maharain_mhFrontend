@@ -1,0 +1,127 @@
+<!-- start content -->
+<section class="user-right-side-content pb-5">
+  <div class="container-fluid">
+      <div class="row">
+          <div class="col-lg-3 col-xl-2">
+             <app-side-navigation></app-side-navigation>
+          </div>
+          <div class="col-lg-9 col-xl-10 ps-md-4">
+
+               <!-- start search -->
+               <div class="search-bg px-4 pb-4 pt-2 px-lg-5 pb-lg-3 pt-lg-2 mb-3">
+                <div class="row align-items-end">
+                    <div class="col-sm-6 col-md-2 mt-2">
+                        <select name="" id="" class="form-select" [(ngModel)]="selectedState">
+                          <option value="">-- State --</option>
+                            <option value="Maharashtra">Maharashtra</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-6 col-md-2 mt-2">
+                      <select name="selectedDivision" class="form-select"  [(ngModel)]="selectedDivision">
+                        <option value="">-- All Divisions --</option>
+                        <option *ngFor="let division of divisions" [value]="division.division_code">
+                          {{ division.division_name }}
+                        </option>
+                      </select>
+                    </div>
+
+
+                  <div class="col-sm-6 col-md-2 mt-2">
+                    <div class="input-group">
+                      <input type="date" class="form-control" placeholder="From Date"[(ngModel)]="fromDate" [max]="maxToDate">
+                    </div>
+                  </div>
+                  <div class="col-sm-6 col-md-2 mt-2">
+                    <div class="input-group">
+                      <input type="date" class="form-control" placeholder="To Date" [(ngModel)]="toDate" [max]="maxToDate">
+                    </div>
+                  </div>
+
+                  <div class="col-sm-6 col-md-1 mt-2">
+                    <div class="input-group">
+                      <input type="text" class="form-control" placeholder="From Duration" [(ngModel)]="fromDuration">
+                    </div>
+                  </div>
+                  <div class="col-sm-6 col-md-1 mt-2">
+                    <div class="input-group">
+                      <input type="text" class="form-control" placeholder="To Duration" [(ngModel)]="toDuration">
+                    </div>
+                  </div>
+
+
+                    <div class="col-sm-6 col-md-1 mt-3">
+                        <div class="d-grid">
+                            <button class="btn btn-primary py-2" (click)="onSubmit()">Go</button>
+                        </div>
+                    </div>
+                </div>
+              </div>
+            <!-- end search -->
+
+             <div *ngIf ="report.length">
+              <!-- Heading -->
+              <div class="report-generated-bg px-4 py-3 mb-4 bg-body-secondary">
+                <div class="row">
+                  <div class="col-sm-6" >
+                    <h5 class="mb-0">Rainfall Recording & Analysis</h5>
+                    <span>Division wise rainfall for <b>Maharashtra</b> State (as on {{today | date:'dd-MM-yyyy'}})</span>
+                  </div>
+                  <div class="col-sm-6 text-end">
+                    <span >Generated at:{{today | date:'dd-MMMM-yyyy h:mm a'}} </span>
+                    <br>
+                    <span>(Rainfall in mm)</span>
+                  </div>
+                </div>
+              </div>
+              <!-- Heading -->
+
+              <!-- start result -->
+              <div >
+              <div class="user-data-result-bg">
+                  <div class="user-data-result-header mb-3">
+                      <div class="row align-items-center">
+                          <div class="col">
+                            <button id="download-pdf" type="button" class="btn btn-dark me-2" (click)="downloadPdf()">Pdf</button>
+                            <button type="button" class="btn btn-dark ms-2" (click)="downloadExcel()">Excel</button>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="table-responsive" >
+                      <table class="table table-bordered">
+                      <thead class="table-light">
+                        <tr>
+                            <th>Sr</th>
+                            <th>Division</th>
+                        </tr>
+                    </thead>
+                  <tbody>
+                    <tr *ngFor="let division of report let idx = index">
+                      <td>{{ idx + 1 }}</td>
+                      <td>{{ division.DivisionName }}</td>
+                      <ng-container *ngFor="let DateData of division.DateData">
+                         <td>{{ DateData.start_date  }} To {{ DateData.end_date  }}</td>
+                         <td>{{ DateData.rain }}</td>
+                         </ng-container>
+                    </tbody>
+                    </table>
+                  </div>
+              </div>
+            </div>
+              <!-- end result -->
+            </div>
+
+            <div *ngIf="submitted && report.length === 0" class="warning">
+
+                <p class="mb-0">No dry spell has occurred.</p>
+
+
+            </div>
+
+          </div>
+      </div>
+  </div>
+</section>
+<!-- end content -->
+
+
+

@@ -1,0 +1,90 @@
+<!-- start content -->
+<section class="user-right-side-content pb-5">
+  <div class="container-fluid">
+      <div class="row">
+          <div class="col-lg-3 col-xl-2">
+             <app-side-navigation></app-side-navigation>
+          </div>
+          <div class="col-lg-9 col-xl-10 ps-md-4">
+           <div >
+            <div class="col-sm-6 col-md-2 mt-3" *ngIf="monthChecked" >
+              <select  name="selectedDistrict" class="form-select" [(ngModel)]="selectedMonth">
+                  <option  value="">-- For month --</option>
+                  <option *ngFor="let month of arraymonth"[value] ='month.value' >{{month.name}}</option>
+              </select>
+            </div>
+            <div *ngIf=" result && result.length">
+            <div class="report-generated-bg px-4 py-3 mb-4 bg-body-secondary">
+              <div class="row">
+                  <h5 class="mb-0">Rainfall Recording & Analysis</h5>
+                  <span>State :: <b>Maharashtra</b> Percent Categorization wise list of District  as compared to normal rainfall ::(as on {{currentDate | date:'dd,MMMM-yyyy'}})</span>
+              </div>
+            </div>
+                <div   class="user-data-result-bg">
+                    <div class="user-data-result-header mb-3">
+                        <div class="row align-items-center">
+                            <div class="col">
+                              <button id="download-pdf" type="button" class="btn btn-dark me-2" (click)="downloadPdf()">Pdf</button>
+                              <button type="button" class="btn btn-dark ms-2" (click)="downloadExcel()">Excel</button>
+                            </div>
+                        </div>
+                    </div>
+                    <table class="table table-bordered">
+                      <thead class="table-light">
+                        <tr>
+                          <th>Sr</th>
+                          <th>Division</th>
+                          <th>District</th>
+                          <th>Count</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <ng-container *ngFor="let intensity of getOrderedIntensityGroups()">
+                          <tr>
+                            <td colspan="5"  style="text-align: center;"><b>{{ intensity }}%</b></td>
+                          </tr>
+                          <ng-container *ngIf="groupedData[intensity] && groupedData[intensity].length > 0">
+                            <ng-container *ngFor="let item of groupedData[intensity]; let i = index;">
+                              <tr>
+                                <td>{{ i + 1 }}</td>
+                                <td>{{ item.division_name }}</td>
+                                <td>
+                                  <div style="white-space: pre-wrap; word-wrap: break-word;">
+                                    {{ item.list | slice:0:40 }}
+                                    <br *ngIf="(item.list | slice:40).length > 0"/>
+                                    {{ item.list | slice:40 }}
+                                  </div>
+                                </td>
+                                <td>{{ item.count }}</td>
+                              </tr>
+                            </ng-container>
+                            <tr>
+                              <td colspan="3" style="text-align: right;"><b>Total</b></td>
+                              <td><b>{{ getTotalCount(groupedData[intensity]) }}</b></td>
+                            </tr>
+                          </ng-container>
+                          <ng-container *ngIf="!groupedData[intensity] || groupedData[intensity].length === 0">
+                            <tr>
+                              <td colspan="4" style="text-align: center;"></td>
+                            </tr>
+                          </ng-container>
+                        </ng-container>
+                        <tr>
+                          <td></td>
+                          <td></td>
+                          <td   style="text-align: right;"><b>Number of Districts</b></td>
+                          <td><b>{{ getTotalTehsilsCount() }}</b></td>
+                        </tr>
+                      </tbody>
+                    </table>
+
+                </div>
+              </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</section>
+<!-- end content -->
+
+

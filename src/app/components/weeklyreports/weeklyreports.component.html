@@ -1,0 +1,134 @@
+<!-- start content -->
+<section class="user-right-side-content pb-5">
+  <div class="container-fluid">
+      <div class="row">
+           <div >
+              <!-- start search -->
+                <div class="search-bg px-4 pb-4 pt-2 px-lg-5 pb-lg-3 pt-lg-2 mb-3">
+                    <div class="row align-items-end">
+                      <div class="col-sm-6 col-md-3 mt-3">
+                        <label for="" class="form-label">Division Type</label>
+                        <select  class="form-select" [(ngModel)]="selectedDivisionType" (change)="onChangeDivtype($event)" >
+                            <option  value="">-- Select division --</option>
+                            <option  value="2">AGRICULTURE DIVISION</option>
+                            <option  value="1">REVENUE DIVISION</option>
+                        </select>
+                    </div>
+                      <div class="col-sm-6 col-md-3 mt-3">
+                        <label for="" class="form-label">Division</label>
+                        <select  class="form-select" [(ngModel)]="selectedDivision" (change)="onChangeDivision($event)" >
+                            <option  value="">-- Select Division --</option>
+                            <option  *ngFor ="let item of divisions" [value]="item.division_code">{{item.division_name}}</option>
+                        </select>
+                    </div>
+                        <div class="col mt-2">
+                          <label for="" class="form-label">District</label>
+                          <select  name="selectedDistrict" class="form-select" [(ngModel)]="selectedDistrict" (change)="onChangeDistrict($event)">
+                            <option  value="">-- All districts --</option>
+                            <option *ngFor ="let item of districts" [value]="item.district_name">{{item.district_name}}</option>
+                        </select>
+                      </div>
+                        <div class="col-sm-6 col-md-3 mt-3">
+                          <label for="" class="form-label">Taluka</label>
+                          <select  class="form-select" [(ngModel)]="selectedTehsil" (change)="onChangeTehsil($event)" >
+                              <option  value="">-- Select Taluka --</option>
+                              <option *ngFor ="let item of tehsils" [value]="item.tehsil">{{item.tehsil}}</option>
+                          </select>
+                      </div>
+                      <div class="col-sm-6 col-md-3 mt-3">
+                        <label for="" class="form-label"  >Revenue Circle</label>
+                        <select  name="selectedDistrict" [(ngModel)]="selectedCircle" class="form-select" (change)="onChangeCircle($event)">
+                            <option  value="">-- Select Revenue Circle --</option>
+                            <option *ngFor ="let item of circles" [value]="item.circle">{{item.circle}}</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-6 col-md-3 mt-3">
+                      <label for="" class="form-label">Location</label>
+                      <select  name="selectedDistrict" class="form-select"  [(ngModel)]="selectedstation">
+                          <option  value="">-- Select Location --</option>
+                          <option *ngFor ="let item of stations" [value]="item.station">{{item.station}}</option>
+                      </select>
+                  </div>
+                      <div class="col-sm-6 col-md-3 mt-3">
+                        <label for="" class="form-label">Week</label>
+                        <select id="week" name="week" class="form-control"(change)="onWeekChange($event)">
+                          <option value="-1">Select Week</option>
+                          <option *ngFor="let week of weekNumbers" [value]="week">{{week}} Week</option>
+                        </select>
+                        <!-- <select (change)="onWeekChange($event)">
+                          <option *ngFor="let week of weekNumbers" [value]="week.week">Week {{ week.week }}
+                          </option>
+                        </select> -->
+                      </div>
+
+                      <div class="col-sm-6 col-md-1 mt-3">
+                            <div class="d-grid">
+                                <button class="btn btn-primary py-2" (click)="onSubmit()">Search</button>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="col-sm-6 col-md-1 mt-3"  style="margin-left: 10px;">
+                            <div class="d-grid">
+                                <button class="btn btn-primary py-2" (click)=" onBtnExport()">Export</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+              <!-- end search -->
+             <div >
+              <div>
+                <input type="text" class="form-control" [value]=" weekStartDate + ' To ' + weekEndDate" readonly>
+               </div>
+                <div class="user-data-result-bg" *ngIf ="result.length">
+                    <div class="user-data-result-header mb-3">
+                        <div class="row align-items-center">
+                        </div>
+                    </div>
+
+                    <div class="table-responsive">
+                      <table class="table table-bordered" >
+                        <thead class="table-light" >
+                          <tr>
+                              <th>Division</th>
+                              <th>DISTRICT</th>
+                              <th>TEHSIL</th>
+                              <th>REVENUE CIRCLE</th>
+                              <th>Location</th>
+                              <th>Date</th>
+                              <th>Max Temp</th>
+                              <th>Min Temp</th>
+                              <th>Max RH</th>
+                              <th>Min RH</th>
+                              <th>Avg Wspeed(kmph)</th>
+                              <th>Wind Gust(kmph)</th>
+                              <th>Weekly Rain(mm)</th>
+                              <th>Weekly Progressive</th>
+                          </tr>
+                      </thead>
+                      <tbody>
+                          <tr *ngFor="let item of result ">
+                            <td>{{item.DIVISION }}</td>
+                            <td>{{item.DISTRICT}}</td>
+                            <td>{{item.TEHSIL}}</td>
+                            <td>{{item.REVENUE_CIRCLE}}</td>
+                            <td>{{item.STATION_NAME }}</td>
+                            <td>{{item.Date }}</td>
+                            <td>{{item.MaxTemp}}</td>
+                            <td>{{item.MinTemp }}</td>
+                            <td>{{item.Humidity}}</td>
+                            <td>{{item.Humidity_5}}</td>
+                            <td>{{item.WSpeed}}</td>
+                            <td>{{item.windgust}}</td>
+                            <td>{{item.AvgRain}}</td>
+                            <td>{{item.prgressiveRainfall}}</td>
+                          </tr>
+                      </tbody>
+                    </table>
+                    </div>
+                </div>
+            </div>
+          </div>
+      </div>
+  </div>
+</section>
+<!-- end content -->

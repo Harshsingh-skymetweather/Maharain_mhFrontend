@@ -1,0 +1,122 @@
+@import '../../../styles.scss';
+
+.header {
+  position: relative;
+  overflow: hidden;
+  height: 100px;
+
+
+  .row {
+    position: relative;
+    padding-top: 8px;
+
+    .col-md-4 {
+      margin-top: 4px;
+
+      .logo {
+        padding-top: 5px;
+        float: right;
+        padding-right: 15px;
+
+        .logoutBtn {
+          .status {
+            font-size: 14px;
+            font-weight: 500;
+          }
+
+          .logout {
+            color: $danger;
+            font-size: 16px;
+            font-weight: 600;
+            text-transform: capitalize;
+            cursor: pointer;
+          }
+        }
+      }
+    }
+
+    &::before {
+      content: "";
+      position: absolute;
+      height: 2px;
+      width: 100%;
+      background-color: red;
+      color: red;
+      left: 65.5%;
+      top: 16px;
+      transform: translateX(-50%);
+      overflow: hidden;
+    }
+
+    .iconList {
+      position: relative;
+      display: flex;
+      gap: 59px;
+      margin-bottom: 20px;
+      margin-left: 50px;
+
+      .headerIcon {
+        cursor: pointer;
+        list-style: none;
+
+        img {
+          width: 30px;
+        }
+      }
+      .dropdown-toggle:after {
+        display: inline-block;
+        margin-left: 0.255em;
+        vertical-align: 0.255em;
+        content: "";
+        border-top: 0 solid;
+        border-right: 0.3em solid transparent;
+        border-bottom: 0;
+        border-left: 0.3em solid transparent;
+      }
+      .dropdown-menu {
+        padding: 10px 15px;
+        border: 1px solid #009dff ;
+        width: 200px;
+        .menu-item {
+          // border-bottom: 1px solid #cdcdcd;
+          .report-link {
+            text-decoration: none;
+            color: #000;
+            padding-left: 8px;
+
+            .report-link-icon {
+              padding-right: 5px;
+              font-size: 12px;
+              img {
+                width: 14px;
+              }
+            }
+            .report-link-text {
+              padding-left: 5px;
+              text-transform: capitalize;
+              font-size: 12px;
+            }
+          }
+          .linkGroup {
+            margin-bottom: 0;
+            color: #000;
+            font-weight: 500;
+            text-transform: capitalize;
+            font-size: 14px;
+          }
+        }
+
+      }
+
+    }
+  }
+
+  .brandLogo {
+    background-image: url('../../../assets/img/sp-logo1.png');
+    background-repeat: no-repeat;
+    width: 294px;
+    height: 62px;
+    margin-top: 0px;
+    float: left;
+  }
+}

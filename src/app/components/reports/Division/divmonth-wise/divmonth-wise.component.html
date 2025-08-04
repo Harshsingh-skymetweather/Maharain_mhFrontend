@@ -1,0 +1,103 @@
+<!-- start content -->
+<section class="user-right-side-content pb-5">
+  <div class="container-fluid">
+      <div class="row">
+          <div class="col-lg-3 col-xl-2">
+             <app-side-navigation></app-side-navigation>
+          </div>
+          <div class="col-lg-9 col-xl-10 ps-md-4">
+
+          <!-- start search -->
+          <div *ngIf="junereports.length">
+            <!-- start report generated -->
+            <div class="report-generated-bg px-4 py-3 mb-4 bg-body-secondary">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <h5 class="mb-0">Rainfall Recording & Analysis</h5>
+                        <span>Division wise rainfall for <b>Maharashtra</b> State (as on {{ today | date: 'dd-MM-yyyy' }})</span>
+                    </div>
+                    <div class="col-sm-6">
+                        <span>Generated at: {{ today | date: 'dd-MMM-yyyy' }} (Rainfall in mm)</span>
+                        <h5 class="mb-0"></h5>
+                    </div>
+                </div>
+            </div>
+              <!-- start report generated -->
+
+              <!-- start result -->
+              <div class="user-data-result-bg">
+                  <div class="user-data-result-header mb-3">
+                      <div class="row align-items-center">
+                          <div class="col">
+                            <button id="download-pdf" type="button" class="btn btn-dark me-2" (click)="downloadPdf()">Pdf</button>
+                            <button type="button" class="btn btn-dark ms-2" (click)="downloadExcel()">Excel</button>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="table-responsive">
+                    <table class="table table-bordered">
+                      <thead class="table-light">
+                        <tr>
+                          <th rowspan="2">Sr</th>
+                          <th rowspan="2">Divisions</th>
+                          <ng-container *ngFor="let month of months">
+                            <th colspan="3">{{ month }}, {{ today | date: 'yyyy' }}</th>
+                          </ng-container>
+                          <th colspan="3">1st June -To- {{ today | date: 'dd MMMM' }}</th>
+                        </tr>
+                        <tr>
+                          <ng-container *ngFor="let month of months">
+                            <th>Division Normal Rainfall</th>
+                            <th>Actual Rainfall</th>
+                            <th>% To Normal</th>
+                          </ng-container>
+                          <th>Division Normal Rainfall</th>
+                          <th>Actual Rainfall</th>
+                          <th>% To Normal</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+
+                        <!-- Loop through division data -->
+                        <tr *ngFor="let division of junereports let idx = index">
+                          <td>{{ idx + 1 }}</td>
+                          <td>{{ division.DivisionName }}</td>
+                          <!-- Loop through monthly data for each division -->
+                          <ng-container *ngFor="let monthData of division.monthlyData">
+                            <td>{{ monthData.normalRainfall | number: '1.1-1'}}</td>
+                            <td>{{ monthData.progressive | number: '1.1-1'}}</td>
+                            <td>{{ monthData.percentToNormal | number: '1.1-1'}}</td>
+                          </ng-container>
+                          <td>{{ calculateTotal(division.monthlyData, 'normalRainfall') | number: '1.1-1' }}</td>
+                          <td>{{ calculateTotal(division.monthlyData, 'progressive') | number: '1.1-1' }}</td>
+                          <td>{{ calculatePercentage(division.monthlyData) | number: '1.1-1' }}</td>
+
+                        </tr>
+                        <tr>
+                          <th></th>
+                          <th>
+                            {{ statereports.state.includes('11') ? 'Maharashtra' : statereports.state }}
+                          </th>
+                          <!-- Loop through state monthly data -->
+                          <ng-container *ngFor="let monthData of statereports.monthlyData">
+                            <th>{{ monthData.normalRainfall }}</th>
+                            <th>{{ monthData.progressive }}</th>
+                            <th>{{ monthData.percentToNormal }}</th>
+                          </ng-container>
+                          <!-- Calculate and display the sum for the desired months -->
+                          <th>{{ calculateTotal(statereports.monthlyData, 'normalRainfall') | number: '1.1-1'}}</th>
+                          <th>{{ calculateTotal(statereports.monthlyData, 'progressive') | number: '1.1-1' }}</th>
+                          <th>{{ calculatePercentage(statereports.monthlyData) | number: '1.1-1' }}</th>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+              </div>
+              <!-- end result -->
+          </div>
+          </div>
+      </div>
+  </div>
+</section>
+<!-- end content -->
+

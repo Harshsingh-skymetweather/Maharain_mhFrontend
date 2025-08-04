@@ -1,0 +1,124 @@
+<!-- start content -->
+<section class="user-right-side-content pb-5">
+  <div class="container-fluid">
+      <div class="row">
+          <div class="col-lg-3 col-xl-2">
+             <app-side-navigation></app-side-navigation>
+          </div>
+          <div class="col-lg-9 col-xl-10 ps-md-4">
+
+              <!-- start search -->
+              <div class="search-bg px-4 pb-4 pt-2 px-lg-5 pb-lg-3 pt-lg-2 mb-3">
+                <div class="row align-items-end">
+                    <div class="col-sm-6 col-md-2 mt-3">
+                        <select name="" id="" class="form-select" [(ngModel)]="selectedState">
+                          <option value="">-- State --</option>
+                            <option value="Maharashtra">Maharashtra</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-6 col-md-2 mt-3">
+                      <select name="selectedDivision" class="form-select" (change)="onChangedivision($event)" [(ngModel)]="selectedDivision">
+                        <option value="">-- All Divisions --</option>
+                        <option *ngFor="let division of divisions" [value]="division.division_code">
+                          {{ division.division_name }}
+                        </option>
+                      </select>
+                    </div>
+                    <div class="col-sm-6 col-md-2 mt-3">
+                      <select  name="selectedDistrict" class="form-select" [(ngModel)]="selectedDistrict">
+                          <option  value="">-- All districts --</option>
+                          <option *ngFor ="let item of districts" [value]="item.district">{{item.district_name}}</option>
+                      </select>
+                  </div>
+                    <div class="col-sm-6 col-md-1 mt-3">
+                        <div class="d-grid">
+                            <button class="btn btn-primary py-2" (click)="onSubmit()">Go</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- end search -->
+            <div *ngIf=" groupedData && groupedData.length">
+              <div class="report-generated-bg px-4 py-3 mb-4 bg-body-secondary">
+                <div *ngIf="selectedDivision!='' && selectedDistrict!=''" class="row">
+                     <div class="col-sm-6">
+                        <h5 class="mb-0">Rainfall Recording & Analysis</h5>
+                        <span>Circles Heavy rain (more than 65 mm) received in district <b>{{ getDistrictName(selectedDistrict) }}</b> of division <b>{{ getDivisionName(selectedDivision) }}</b> (as on {{ today | date:'dd-MMM-yyyy' }})</span>
+                      </div>
+                      <div class="col-sm-6 text-end">
+                        <span>Generated at:{{today | date:'dd-MMMM-yyyy h:mm a'}} (Rainfall in mm)</span>
+
+                      </div>
+                </div>
+                <div *ngIf="selectedDivision!='' && selectedDistrict==''" class="row">
+                  <div class="col-sm-6">
+                    <h5 class="mb-0">Rainfall Recording & Analysis</h5>
+                    <span>Circles Heavy rain (more than 65 mm) received in all districts of  division <b>{{ getDivisionName(selectedDivision) }}</b> (as on {{ today | date:'dd-MMM-yyyy' }})</span>
+                  </div>
+                  <div class="col-sm-6 text-end">
+                    <span>Generated at:{{today | date:'dd-MMMM-yyyy h:mm a'}} (Rainfall in mm)</span>
+
+                  </div>
+                </div>
+                  <div *ngIf="selectedDivision=='' && selectedDistrict==''" class="row">
+                      <div class="col-sm-6">
+                          <h5 class="mb-0">Rainfall Recording & Analysis</h5>
+                          <span>Circles Heavy rain (more than 65 mm) received in <b>Maharashtra</b> State (as on {{ today | date:'dd-MMM-yyyy' }})</span>
+                        </div>
+                        <div class="col-sm-6 text-end">
+                          <span>Generated at:{{today | date:'dd-MMMM-yyyy h:mm a'}} (Rainfall in mm)</span>
+                        
+                  </div>
+              </div>
+            </div>
+              <!-- start report generated -->
+
+              <!-- start result -->
+              <div class="user-data-result-bg">
+                  <div class="user-data-result-header mb-3">
+                      <div class="row align-items-center">
+                          <div class="col">
+                            <button id="download-pdf" type="button" class="btn btn-dark me-2" (click)="downloadPdf()">Pdf</button>
+                            <button type="button" class="btn btn-dark ms-2" (click)="downloadExcel()">Excel</button>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="table-responsive">
+                    <table class="table table-bordered">
+                      <thead class="table-light">
+                        <tr>
+                          <th>Sr</th>
+                          <th>District</th>
+                          <th>Taluka</th>
+                          <th>Circle</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr *ngFor="let item of groupedData; let i = index">
+                          <td>{{ i + 1 }}</td>
+                          <td>{{item.district_name}}</td>
+                          <td>{{item.tehsil}}</td>
+                          <td>{{item.circle}}</td>
+                          <ng-container *ngFor="let object of item.data">
+                              <td style="width: auto; ">{{object.date}} ({{object.rain}})</td>
+                          </ng-container>
+                        </tr>
+                      </tbody>
+                    </table>
+
+
+                  </div>
+              </div>
+              <!-- end result -->
+            </div>
+            <div *ngIf="submitted && groupedData.length === 0" class="warning">
+              <p class="mb-0">No Heavy Rainfall Found.</p>
+            </div>
+
+          </div>
+      </div>
+  </div>
+</section>
+<!-- end content -->
+
+

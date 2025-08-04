@@ -1,0 +1,153 @@
+<!-- start content -->
+<section class="user-right-side-content pb-5">
+  <div class="container-fluid">
+      <div class="row">
+          <div class="col-lg-3 col-xl-2">
+             <app-side-navigation></app-side-navigation>
+          </div>
+          <div class="col-lg-9 col-xl-10 ps-md-4">
+          <!-- start search -->
+          <div *ngIf="junereports.length">
+            <!-- start report generated -->
+            <div class="report-generated-bg px-4 py-3 mb-4 bg-body-secondary">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <h5 class="mb-0">Rainfall Recording & Analysis</h5>
+                        <span>Division wise rainfall for <b>Maharashtra</b> State (as on {{ today | date: 'dd-MM-yyyy' }})</span>
+                    </div>
+                    <div class="col-sm-6 text-end">
+                        <span>Generated at: {{ today | date:'dd-MMMM-yyyy h:mm a' }} (Rainfall in mm)</span>
+                        <h5 class="mb-0"></h5>
+                    </div>
+                </div>
+            </div>
+              <!-- start report generated -->
+
+              <!-- start result -->
+              <div class="user-data-result-bg">
+                  <div class="user-data-result-header mb-3">
+                      <div class="row align-items-center">
+                          <div class="col">
+                            <button id="download-pdf" type="button" class="btn btn-dark me-2" (click)="downloadPdf()">Pdf</button>
+                            <button type="button" class="btn btn-dark ms-2" (click)="downloadExcel()">Excel</button>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="table-responsive">
+                      <table class="table table-bordered">
+                        <thead class="table-light">
+                          <tr>
+                              <th rowspan="2">Sr</th>
+                              <th rowspan="2">Division</th>
+                              <th colspan="3" >
+                                <ng-container *ngFor="let month of months; let last = last">
+                                  {{ month }}
+                                  <ng-container *ngIf="!last"> - </ng-container>
+                                </ng-container>
+                              </th >
+                              <th colspan="5" >
+                                Sept
+                              </th>
+                              <th colspan="3">
+                                  Jun Onwards
+                              </th>
+                              <th rowspan="2">Jun-Sept, Normal Rainfall</th>
+                              <th rowspan="2">% to Normal, Jun-Sept</th>
+                              <th colspan="2">Previous Year</th>
+                          </tr>
+                          <tr>
+                              <th>Division Normal Rainfall</th>
+                              <th>Actual Rainfall</th>
+                              <th>% To Normal</th>
+
+                              <th>Division Normal Rainfall</th>
+                              <th>Till Previous Day</th>
+                              <th>On Day of Report</th>
+                              <th>Progressive Total</th>
+                              <th>% To Normal</th>
+
+                              <th>Division Normal Rainfall</th>
+                              <th>Actual Rainfall</th>
+                              <th>% To Normal</th>
+
+                              <th>Till Day</th>
+                              <th>% to Normal</th>
+                          </tr>
+                      </thead>
+                      <tbody>
+
+                        <tr *ngFor="let division of junereports let idx = index">
+                          <td>{{ idx + 1 }}</td>
+                          <td>{{ division.DivisionName }}</td>
+
+
+                          <td>{{ calculateTotal(division.monthlyData.slice(0, 3), 'normalRainfall') | number: '1.1-1' }}</td>
+                          <td>{{ calculateTotal(division.monthlyData.slice(0, 3), 'progressive') | number: '1.1-1' }}</td>
+                          <td>{{ calculatePercentage(division.monthlyData.slice(0, 3)) | number: '1.1-1' }}</td>
+
+
+                          <ng-container *ngFor="let monthData of division.monthlyData">
+                            <ng-container *ngIf="monthData.month==9">
+                              <td>{{ monthData.normalRainfall | number: '1.1-1' }}</td>
+                              <td>{{ monthData.actualRainfall | number: '1.1-1' }}</td>
+                              <td>{{ monthData.on_day | number: '1.1-1' }}</td>
+                              <td>{{ monthData.progressive | number: '1.1-1' }}</td>
+                              <td>{{ monthData.percentToNormal | number: '1.1-1' }}</td>
+                            </ng-container>
+                          </ng-container>
+
+                          <td>{{ calculateTotal(division.monthlyData.slice(0, 4), 'normalRainfall') | number: '1.1-1' }}</td>
+                          <td>{{ calculateTotal(division.monthlyData.slice(0, 4), 'progressive') | number: '1.1-1' }}</td>
+                          <td>{{ calculatePercentage(division.monthlyData.slice(0, 4)) | number: '1.1-1' }}</td>
+
+                          <td>{{ division.JunseptNormal }}</td>
+                          <td>{{ calculateTotal(division.monthlyData.slice(0, 4), 'progressive')* 100 / division.JunseptNormal | number: '1.1-1'}}</td>
+                          <!-- <th>{{ calculateTotal(division.JunseptNormal, 'progressive')* 100 / division.JunseptNormal | number: '1.1-1'}}</th> -->
+                          <!-- <td>{{ calculatePercentage(division.monthlyData.slice(0, 4)) | number: '1.1-1' }}</td> -->
+
+                          <td>{{ calculateTotal(division.monthlyData.slice(0, 4), 'prevAvg') | number: '1.1-1' }}</td>
+                          <td>{{ calculatePrevPercentage(division.monthlyData.slice(0, 4)) | number: '1.1-1' }}</td>
+                       </tr>
+                        <tr>
+                          <th></th>
+                          <th>
+                            {{ statereports.state.includes('11') ? ' State - Maharashtra' : statereports.state }}
+                          </th>
+                          <th>{{ calculateTotal(statereports.monthlyData.slice(0, 3), 'normalRainfall') | number: '1.1-1' }}</th>
+                          <th>{{ calculateTotal(statereports.monthlyData.slice(0, 3), 'progressive') | number: '1.1-1' }}</th>
+                          <th>{{ calculatePercentage(statereports.monthlyData.slice(0, 3)) | number: '1.1-1' }}</th>
+
+                          <!-- Loop through state monthly data -->
+                          <ng-container *ngFor="let monthData of statereports.monthlyData">
+                            <ng-container *ngIf="monthData.month==9">
+                              <th>{{ monthData.normalRainfall | number: '1.1-1' }}</th>
+                              <th>{{ monthData.actualRainfall | number: '1.1-1' }}</th>
+                              <th>{{ monthData.on_day | number: '1.1-1' }}</th>
+                              <th>{{ monthData.progressive | number: '1.1-1' }}</th>
+                              <th>{{ monthData.percentToNormal | number: '1.1-1' }}</th>
+                            </ng-container>
+                          </ng-container>
+
+                          <th>{{ calculateTotal(statereports.monthlyData.slice(0, 4), 'normalRainfall') | number: '1.1-1' }}</th>
+                          <th>{{ calculateTotal(statereports.monthlyData.slice(0, 4), 'progressive') | number: '1.1-1' }}</th>
+                          <th>{{ calculatePercentage(statereports.monthlyData.slice(0, 4)) | number: '1.1-1' }}</th>
+
+                          <th>{{ statereports.JunseptNormal }}</th>
+                          <th>{{ calculateTotal(statereports.monthlyData.slice(0, 4), 'progressive')* 100 / statereports.JunseptNormal | number: '1.1-1'}}</th>
+
+
+                          <th>{{ calculateTotal(statereports.monthlyData.slice(0, 4), 'prevAvg') | number: '1.1-1' }}</th>
+                          <th>{{ calculatePrevPercentage(statereports.monthlyData.slice(0, 4)) | number: '1.1-1' }}</th>
+
+                        </tr>
+                      </tbody>
+                      </table>
+                  </div>
+              </div>
+              <!-- end result -->
+          </div>
+          </div>
+      </div>
+  </div>
+</section>
+<!-- end content -->
